@@ -1,4 +1,3 @@
-## Version
 Tree-Classifier for Linear Regression:
 Version TCLR.1.0.0, October, 2020
 
