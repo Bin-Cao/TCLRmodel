@@ -13,5 +13,5 @@ To run this software, you need to install  **graphviz** in advance, which can be
 Output: 
 data classification structure tree in pdf format（Result of TCLR.pdf)
 ## About
-Created and maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
+Proposed by Tong-yi Zhang and Bin Cao et al., and maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
 (bcao@shu.edu.cn) in case of any problems/comments/suggestions in using the code.
