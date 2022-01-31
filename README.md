@@ -14,4 +14,4 @@ Output:
 data classification structure tree in pdf format（Result of TCLR.pdf)
 ## About
 Proposed by Tong-yi Zhang and Bin Cao et al., and maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
-(bcao@shu.edu.cn) in case of any problems/comments/suggestions in using the code. Please download at Releases 
+(bcao@shu.edu.cn) in case of any problems/comments/suggestions in using the code. Please download at Releases ——> TCLR_upload_files!
