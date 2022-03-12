@@ -19,7 +19,7 @@ TCLR.V1.0.0 is coded by Paython language, thus the Integrated Development Enviro
 Output: 
 + classification structure tree in pdf format（Result of TCLR.pdf)
 
-## PredictGUI:
+## PredictGUI
 We provide an executable interface that predicts oxidation weight gain.
 There is a built-in system folder (resource), please do not delete!
 
