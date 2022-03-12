@@ -12,7 +12,16 @@ To run this software, you need to install  **graphviz** in advance, which can be
 
 Output: 
 data classification structure tree in pdf format（Result of TCLR.pdf)
+
+## PredictGUI:
+We provide an executable interface that predicts oxidation weight gain.
+There is a built-in system folder (resource), please do not delete!
+
+
+The GUI can be  download at Releases ——> TCLR_upload_files
+
+
 ## About
 Proposed by Prof. Tong-yi Zhang and Mr. Bin Cao et al., and maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
-(bcao@shu.edu.cn) in case of any problems/co
-mments/suggestions in using the code. Please download at Releases ——> TCLR_upload_files!
+(bcao@shu.edu.cn) in case of any problems/comments/suggestions in using the code. 
+
