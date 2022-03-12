@@ -6,7 +6,7 @@ Doi: papaer
 
 Develpment by Python 3.7, which can be run on operating systems such as Windows/Linux/MAC OS
 ## Running TCLR
-TCLR can be executed directly through the python language, or download the Graphical User Interfaces (GUI) we provide： TCLR.exe
+TCLR can be executed directly through the python language, or download the Graphical User Interfaces (GUI) we provided： TCLR.exe
 
 To run this software, you need to install  **graphviz** in advance, which can be downloaded from the official website http://www.graphviz.org/.
 
