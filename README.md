@@ -1,7 +1,7 @@
 # TCLR
 TCLR V1.0.0. October, 2020. 
 
-Tree-Classifier for Linear Regression (TCLR) is a novel tree model to capture the functional relationships between features and a target based on correlation.
+Tree-Classifier for Linear Regression (TCLR) is a novel tree model to capture the functional relationships between features and a target based on correlation.The entire feature space is partitioned into many sub-spaces, one terminal node representing one sub-space, by hyperplanes parallel to feature axes. In each leaf, the target is linearly proportional to features with certain values of coefficients. The linear relationship is proposed in prior by domain knowledge and theoretically represents a mechanism of studied phenomenon. Furthermore, the obtained values of coefficients shed light on the detail of mechanism.
 
 Reference:
 Doi: papaer
