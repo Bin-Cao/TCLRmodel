@@ -32,6 +32,6 @@ There is a built-in system folder (resource), please do not delete!
 
 
 ## About
-Proposed by Prof. Tong-yi Zhang and Mr. Bin Cao et al., and maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
+Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
 (bcao@shu.edu.cn) in case of any problems/comments/suggestions in using the code. 
 
