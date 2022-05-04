@@ -1,5 +1,5 @@
 # TCLR
-TCLR V1.0.0. October, 2021. 
+TCLR V1.0 October, 2021. 
 
 Tree-Classifier for Linear Regression (TCLR) is a novel tree model to capture the functional relationships between features and a target based on correlation.The entire feature space is partitioned into many sub-spaces, one terminal node representing one sub-space, by hyperplanes parallel to feature axes. In each leaf, the target is linearly proportional to features with certain values of coefficients. The linear relationship is proposed in prior by domain knowledge and theoretically represents a mechanism of studied phenomenon. Furthermore, the obtained values of coefficients shed light on the detail of mechanism.
 
@@ -11,7 +11,7 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 
 ## Running TCLR
 
-TCLR.V1.0.0 is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed directly through the python IDE, or used by downloading the Graphical User Interfaces (GUI) we provided： TCLR.exe
+TCLR.V1.0 is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed directly through the python IDE, or used by downloading the Graphical User Interfaces (GUI) we provided： TCLR.exe
 
 <u>The GUI can be  download at Releases ——> TCLR_upload_files</u>
 
@@ -29,6 +29,11 @@ There is a built-in system folder (resource), please do not delete!
 ## Contents 
 + Source Code 
 + Template : templates for calling TCLR
+
+## Update log
+TCLR V1.1 April, 2022. 
+>>> debug
+>>> print out the slopes when Pearson is used
 
 
 ## About
