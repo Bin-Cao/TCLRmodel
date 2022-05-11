@@ -19,6 +19,7 @@ TCLR.V1.0 is coded by Paython language, thus the Integrated Development Environm
 
 Output: 
 + classification structure tree in pdf format（Result of TCLR.pdf)
++ a folder called 'Segmented' for saving the subdataset of each leaf
 
 ## PredictGUI
 We provide an executable interface that predicts oxidation weight gain.
