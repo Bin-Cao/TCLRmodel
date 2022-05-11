@@ -36,7 +36,7 @@ TCLR V1.1 April, 2022.
 *debug and print out the slopes when Pearson is used*
 
 TCLR V1.2 May, 2022.
-*Save the dataset on each leaf*
+*Save the dataset of each leaf*
 
 
 ## About
