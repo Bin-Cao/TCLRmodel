@@ -11,19 +11,15 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 
 ## Running TCLR
 
-TCLR.V1.0 is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed directly through the python IDE, or used by downloading the Graphical User Interfaces (GUI) we provided： TCLR.exe
+TCLR.V1.0 is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed directly through the python IDE, or used by downloading the Graphical User Interfaces (GUI) we provided： TCLR_interface.exe
 
-<u>The GUI can be  download at Releases ——> TCLR_upload_files</u>
+<u>The GUI can be  download at Releases ——> GUI of TCLR </u>
 
 **graphviz** package is needed for running TCLR, which can be downloaded from the official website http://www.graphviz.org/.
 
 Output: 
 + classification structure tree in pdf format（Result of TCLR.pdf)
 + a folder called 'Segmented' for saving the subdataset of each leaf
-
-## PredictGUI
-We provide an executable interface that predicts oxidation weight gain.
-There is a built-in system folder (resource), please do not delete!
 
 
 <u>The GUI can be  download at Releases ——> TCLR_upload_files</u>
