@@ -22,7 +22,7 @@ Output:
 + a folder called 'Segmented' for saving the subdataset of each leaf
 
 
-<u>The GUI can be  download at Releases ——> TCLR_upload_files</u>
+<u>The GUI can be  download at Releases ——> GUI of TCLR </u>
 ## Contents 
 + Source Code 
 + Template : templates for calling TCLR
