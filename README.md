@@ -35,7 +35,7 @@ TCLR V1.2 May, 2022.
 *Save the dataset of each leaf*
 
 TCLR V1.3 Jun, 2022.
-*Para: minsize - Minimum unique values for linear features of data on each leaf (Minimum number of data on each leaf before V1.3)
+*Para: *minsize - *Minimum unique values for linear features of data on each leaf (Minimum number of data on each leaf before V1.3)
 
 ## About
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
