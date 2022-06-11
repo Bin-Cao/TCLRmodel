@@ -37,9 +37,6 @@ Output:
 
 
 <u>The GUI can be  download at Releases ——> GUI of TCLR </u>
-## Contents 
-+ Source Code 
-+ Template : templates for calling TCLR
 
 ## Update log
 TCLR V1.1 April, 2022. 
