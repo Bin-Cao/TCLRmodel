@@ -12,16 +12,16 @@ Doi: http://dx.doi.org/10.20517/jmi.2022.04
 
 Written using Python, which is suitable for operating systems, e.g., Windows/Linux/MAC OS etc.
 
-## Install TCLR
-+ >>> pip innstall TCLR
+## Installing TCLR
++ pip install TCLR
 
 ## Running TCLR
 
-+ >>> from TCLR import TCLRalgorithm as model
-+ >>> dataSet = "testdata.csv". # dataset name
-+ >>> correlation = 'PearsonR(+)'
-+ >>> minsize, threshold, mininc = 3, 0.9, 0.01
-+ >>> model.start(dataSet, correlation, minsize, threshold, mininc)
++ from TCLR import TCLRalgorithm as model
++ dataSet = "testdata.csv". # dataset name
++ correlation = 'PearsonR(+)'
++ minsize, threshold, mininc = 3, 0.9, 0.01
++ model.start(dataSet, correlation, minsize, threshold, mininc)
 
 
 TCLR.V1.0 is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed directly through the python IDE, or used by downloading the Graphical User Interfaces (GUI) we provided： TCLR_interface.exe
