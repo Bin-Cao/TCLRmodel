@@ -1,7 +1,7 @@
 # TCLR package
 TCLR, Version 1, October, 2021. 
 
-<img width="752" alt="Screen Shot 2022-06-12 at 7 14 42 AM" src="https://user-images.githubusercontent.com/86995074/173207888-eb5c7d30-ae26-44a4-a486-584efb48b89d.png">
+![WechatIMG923](https://user-images.githubusercontent.com/86995074/173210884-7a02a4ad-32a3-4e3b-be0b-1afdb1b3dbfb.png)
 
 
 Tree-Classifier for Linear Regression (TCLR) is a novel Machine learning model to capture the functional relationships between features and a target based on correlation.
