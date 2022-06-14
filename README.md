@@ -28,7 +28,7 @@ TCLR.V1.0 is coded by Paython language, thus the Integrated Development Environm
 
 <u>The GUI can be  download at Releases ——> GUI of TCLR </u>
 
-**graphviz** package is needed for running TCLR, which can be downloaded from the official website http://www.graphviz.org/.
+**graphviz** package is needed for running TCLR, which can be downloaded from the official website http://www.graphviz.org/. see user guide
 
 Output: 
 + classification structure tree in pdf format（Result of TCLR.pdf)
