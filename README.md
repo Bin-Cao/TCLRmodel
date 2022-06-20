@@ -24,14 +24,14 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 + model.start(dataSet, correlation, minsize, threshold, mininc)
 
 
-TCLR.V1.0 is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed through any python IDE
+TCLR Version 1 is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed through any python IDE
 
 
 **graphviz** package is needed for running TCLR, which can be downloaded from the official website http://www.graphviz.org/. see user guide
 
 Output: 
 + classification structure tree in pdf format（Result of TCLR.pdf)
-+ a folder called 'Segmented' for saving the subdataset of each leaf
++ a folder called 'Segmented' for saving the subdataset of each leaf (passed test)
 
 
 ## Update log
