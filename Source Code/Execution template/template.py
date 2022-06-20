@@ -1,3 +1,4 @@
+#coding=utf-8
 from TCLR import TCLRalgorithm as model
 """
 # :param dataSet：the input dataset
