@@ -7,7 +7,7 @@ from TCLR import TCLRalgorithm as model
 #     * R2 for no-linear relationship
 #  :param minsize : a int number, minimum unique values for linear features of data on each leaf.
 #  :param threshold : a float, less than or equal to 1, default 0.95 for PearsonR.
-#     To avoid overfitting, threshold = 0.5 is suggested for MIC 0.5.
+#                     to avoid overfitting, threshold = 0.5 is suggested for MIC.
 #  :param mininc :Minimum expected gain of objective function
 """
 dataSet = "testdata.csv"
