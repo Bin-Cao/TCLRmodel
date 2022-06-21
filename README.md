@@ -15,6 +15,9 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 ## Installing TCLR
 + pip install TCLR
 
+## updating to the latest version
++ pip install --upgrade TCLR
+
 ## Running TCLR
 
 + from TCLR import TCLRalgorithm as model
