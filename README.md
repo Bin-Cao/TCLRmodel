@@ -15,7 +15,7 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 ## Installing TCLR
 + pip install TCLR
 
-## updating to the latest version
+## Updating to the latest version
 + pip install --upgrade TCLR
 
 ## Running TCLR
@@ -27,7 +27,7 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 + model.start(dataSet, correlation, minsize, threshold, mininc, gplearn = True)
 
 
-TCLR Version 1 is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed through any python IDE
+TCLR（Version 1） is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed through any python IDE
 
 
 **graphviz** package is needed for running TCLR, which can be downloaded from the official website http://www.graphviz.org/. see user guide
