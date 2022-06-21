@@ -1,5 +1,0 @@
-print('Tree Classifier for Linear Regression (TCLR) V1.2.0')
-print('TCLR Algorithm is developed by Prof.T-Y Zhang, Mr. Bin Cao et al.')
-print('------------------------------------------------------------------')
-print("Reference : Domain knowledge guided interpretive machine learning\n——  Formula discovery for the oxidation behavior of Ferritic-Martensitic steels in supercritical water.\n2022, journal paper, DOI : 10.20517/jmi.2022.04.")
-print('------------------------------------------------------------------')
