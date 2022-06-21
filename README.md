@@ -49,6 +49,7 @@ TCLR V1.3 Jun, 2022.
 
 TCLR V1.4 Jun, 2022.
 *Integrated symbolic regression algorithm of gplearn package*
+*Derive an analytical formula between features and solpes by symbolic regression*
 
 ## About
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
