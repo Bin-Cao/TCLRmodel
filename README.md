@@ -21,7 +21,7 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 + dataSet = "testdata.csv" # dataset name
 + correlation = 'PearsonR(+)'
 + minsize, threshold, mininc = 3, 0.9, 0.01
-+ model.start(dataSet, correlation, minsize, threshold, mininc)
++ model.start(dataSet, correlation, minsize, threshold, mininc, gplearn = True)
 
 
 TCLR Version 1 is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed through any python IDE
@@ -43,6 +43,9 @@ TCLR V1.2 May, 2022.
 
 TCLR V1.3 Jun, 2022.
 *Para: minsize - Minimum unique values for linear features of data on each leaf (Minimum number of data on each leaf before V1.3)*
+
+TCLR V1.4 Jun, 2022.
+*Integrated symbolic regression algorithm of gplearn package*
 
 ## About
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
