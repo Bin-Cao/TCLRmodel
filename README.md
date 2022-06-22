@@ -1,4 +1,4 @@
-# TCLR package 算法库
+# TCLR package 
 TCLR, Version 1, October, 2021. 
 
 ![WechatIMG1262](https://user-images.githubusercontent.com/86995074/174769421-de1a3a51-2ff4-431d-9bb5-66b5d4922c76.png)
@@ -6,7 +6,7 @@ TCLR, Version 1, October, 2021.
 
 Tree-Classifier for Linear Regression (TCLR) is a novel Machine learning model to capture the functional relationships between features and a target based on correlation.
 
-TCLR算法通过提供的数据集得到研究变量和时间指数等物理变量的显示公式，适用于腐蚀、蠕变等通过动力学或者热力学方程描述的物理过程。通过最大化激活能和最小化时间指数可以高效地设计具有耐腐蚀等优异服役性能的合金。最新版本V1.4，附有安装说明和运行模版。
+TCLR算法通过提供的数据集得到研究变量和时间指数等物理变量之间的显示公式，适用于腐蚀、蠕变等满足动力学或者热力学的物理过程。通过最大化激活能和最小化时间指数可以高效地设计具有高耐腐蚀等优异性能的合金。最新版本V1.4，附有安装说明和运行模版。
 
 Reference paper : Cao B, Yang S, Sun A, Dong Z, Zhang TY. Domain knowledge-guided interpretive machine learning - formula discovery for the oxidation behaviour of ferritic-martensitic steels in supercritical water. J Mater Inf 2022. 
 
