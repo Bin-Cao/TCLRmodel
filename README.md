@@ -29,7 +29,7 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 + model.start(dataSet, correlation, minsize, threshold, mininc, gplearn = True)
 
 
-Output 运行结果: 
+output 运行结果: 
 + classification structure tree in pdf format（Result of TCLR.pdf) 图形结果
 + a folder called 'Segmented' for saving the subdataset of each leaf (passed test) 数据文件
 
