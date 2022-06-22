@@ -33,7 +33,7 @@ Output 运行结果:
 + classification structure tree in pdf format（Result of TCLR.pdf) 图形结果
 + a folder called 'Segmented' for saving the subdataset of each leaf (passed test) 数据文件
 
-note : 
+note 注释: 
 
 the complete execution template can be downloaded at the *Source Code** folder 算法运行模版可在 *Source Code* 文件夹下载
 
