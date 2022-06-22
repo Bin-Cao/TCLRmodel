@@ -14,13 +14,13 @@ Doi: http://dx.doi.org/10.20517/jmi.2022.04
 
 Written using Python, which is suitable for operating systems, e.g., Windows/Linux/MAC OS etc.
 
-## Installing TCLR / 安装
+## Installing / 安装
 + pip install TCLR
 
-## Updating to the latest version / 版本更新
+## Updating / 更新
 + pip install --upgrade TCLR
 
-## Running TCLR / 执行
+## Running / 执行
 
 + from TCLR import TCLRalgorithm as model
 + dataSet = "testdata.csv" # dataset name
@@ -40,7 +40,7 @@ Output 运行结果:
 + a folder called 'Segmented' for saving the subdataset of each leaf (passed test) 数据文件
  
 
-## Update log / 更新日志
+## Update log / 日志
 TCLR V1.1 April, 2022. 
 *debug and print out the slopes when Pearson is used*
 
