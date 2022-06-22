@@ -33,8 +33,9 @@ Output 运行结果:
 + classification structure tree in pdf format（Result of TCLR.pdf) 图形结果
 + a folder called 'Segmented' for saving the subdataset of each leaf (passed test) 数据文件
 
-note : the complete execution template can be downloaded at the *Source Code** folder 算法运行模版可在 *Source Code* 文件夹下载
+note : 
 
+the complete execution template can be downloaded at the *Source Code** folder 算法运行模版可在 *Source Code* 文件夹下载
 
 **graphviz** (recommended installation) package is needed for generating the graphical results, which can be downloaded from the official website http://www.graphviz.org/. see user guide.（推荐安装）用于生成TCLR的图形化结果, 下载地址: http://www.graphviz.org/.
 
