@@ -20,7 +20,7 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 ## Updating / 更新
 + pip install --upgrade TCLR
 
-## Running / 执行
+## Running / 运行
 
 + from TCLR import TCLRalgorithm as model
 + dataSet = "testdata.csv" # dataset name
