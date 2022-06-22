@@ -27,7 +27,8 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 + correlation = 'PearsonR(+)'
 + minsize, threshold, mininc = 3, 0.9, 0.01
 + model.start(dataSet, correlation, minsize, threshold, mininc, gplearn = True)
-note : the complete execution template can be downloaded at the **source code** folder 算法运行模版可在 **source code** 文件夹下载
+
+note : the complete execution template can be downloaded at the *Source Code** folder 算法运行模版可在 *Source Code* 文件夹下载
 
 
 TCLR（Version 1） is coded by Paython language, thus the Integrated Development Environment (IDE) of Python is essential. TCLR can be executed through any python IDE
