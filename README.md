@@ -15,7 +15,7 @@ Doi: http://dx.doi.org/10.20517/jmi.2022.04
 Written using Python, which is suitable for operating systems, e.g., Windows/Linux/MAC OS etc.
 
 ## Installing / 安装
-+ pip install TCLR
+～ pip install TCLR ～
 
 ## Updating / 更新
 + pip install --upgrade TCLR
