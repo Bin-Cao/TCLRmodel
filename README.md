@@ -18,15 +18,17 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
     pip install TCLR 
 
 ## Updating / 更新
-+ pip install --upgrade TCLR
+    pip install --upgrade TCLR
 
 ## Running / 运行
 
-+ from TCLR import TCLRalgorithm as model
-+ dataSet = "testdata.csv" # dataset name
-+ correlation = 'PearsonR(+)'
-+ minsize, threshold, mininc = 3, 0.9, 0.01
-+ model.start(dataSet, correlation, minsize, threshold, mininc, gplearn = True)
+～～～
+from TCLR import TCLRalgorithm as model
+dataSet = "testdata.csv" # dataset name
+correlation = 'PearsonR(+)'
+minsize, threshold, mininc = 3, 0.9, 0.01
+model.start(dataSet, correlation, minsize, threshold, mininc, gplearn = True)
+～～～
 
 
 output 运行结果: 
