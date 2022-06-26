@@ -22,14 +22,13 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 
 ## Running / 运行
 
-～～～
+```
 from TCLR import TCLRalgorithm as model
 dataSet = "testdata.csv" # dataset name
 correlation = 'PearsonR(+)'
 minsize, threshold, mininc = 3, 0.9, 0.01
 model.start(dataSet, correlation, minsize, threshold, mininc, gplearn = True)
-～～～
-
+```
 
 output 运行结果: 
 + classification structure tree in pdf format（Result of TCLR.pdf) 图形结果
