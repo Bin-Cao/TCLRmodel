@@ -1,4 +1,6 @@
-# TCLR package 
+
+[![](https://img.shields.io/badge/PyPI-caobin-blue)](https://pypi.org/project/TCLR/)
+# TCLR 
 
 ![Screen Shot 2022-07-11 at 5 21 58 PM](https://user-images.githubusercontent.com/86995074/178232388-42f02447-5405-43e0-a344-0ab6be0f6690.png)
 
