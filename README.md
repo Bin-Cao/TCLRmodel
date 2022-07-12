@@ -23,11 +23,13 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 ## Running / 运行
 ### Ref. https://github.com/Bin-Cao/TCLRmodel/tree/main/Source%20Code
 
-```
+``` javascript
 from TCLR import TCLRalgorithm as model
+
 dataSet = "testdata.csv" # dataset name
 correlation = 'PearsonR(+)'
 minsize, threshold, mininc = 3, 0.9, 0.01
+
 model.start(dataSet, correlation, minsize, threshold, mininc, gplearn = True)
 ```
 
