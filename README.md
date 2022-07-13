@@ -28,10 +28,12 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 ``` javascript
 from TCLR import TCLRalgorithm as model
 
-dataSet = "testdata.csv" # dataset name
+# import your datasest and set parameters
+dataSet = "testdata.csv"
 correlation = 'PearsonR(+)'
 minsize, threshold, mininc = 3, 0.9, 0.01
 
+# execute TCLR
 model.start(dataSet, correlation, minsize, threshold, mininc, gplearn = True)
 ```
 
