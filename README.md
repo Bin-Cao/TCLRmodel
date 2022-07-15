@@ -26,10 +26,10 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 ### Ref. https://github.com/Bin-Cao/TCLRmodel/tree/main/Source%20Code
 
 ``` javascript
-#coding=utf-8
+# coding=utf-8
 from TCLR import TCLRalgorithm as model
 
-# import your datasest and set parameters
+
 from TCLR import TCLRalgorithm as model
 """
     :param correlation : {'PearsonR(+)','PearsonR(-)',''MIC','R2'}，default PearsonR(+).
