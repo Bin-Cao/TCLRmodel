@@ -1,0 +1,21 @@
+Formula : 
+sqrt(1/RT_split_feature_3)
+Fitness : 
+mean absolute error = 0.09576571128312472
+
+
+_______________________________________________________________________________
+Symbols annotation:
+- add : addition, arity=2.
+- sub : subtraction, arity=2.
+- mul : multiplication, arity=2.
+- div : protected division where a denominator near-zero returns 1.
+- sqrt : protected square root where the absolute value of the argument is used.
+- log : protected log where the absolute value of the argument is used.
+- abs : absolute value, arity=1.
+- neg : negative, arity=1.
+- inv : protected inverse where a near-zero argument returns 0.
+- max : maximum, arity=2.
+- sin : sine (radians), arity=1.
+- cos : cosine (radians), arity=1.
+- tan : tangent (radians), arity=1.

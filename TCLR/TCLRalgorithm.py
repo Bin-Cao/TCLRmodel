@@ -1,5 +1,5 @@
 """
-    Tree Classifier for Linear Regression (TCLR) V1.4.4
+    Tree Classifier for Linear Regression (TCLR) V1.4.6
 
     TCLR is a novel tree model proposed by Prof.T-Y Zhang and Mr.Bin Cao et al. to capture the functional relationships
     between features and target, which partitions the feature space into a set of rectangles, and embody a specific function in each one.
@@ -501,11 +501,11 @@ def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc
             sr_data = np.array(sr_data)
             gpmodel = genetic.SymbolicRegressor(
                 population_size = population_size, generations = generations, 
-                verbose = verbose,feature_names = sr_featurname[:-3],function_set = function_set,
+                verbose = verbose,feature_names = sr_featurname[:-4],function_set = function_set,
                 metric = metric
                  )
-            formula = gpmodel.fit(sr_data[:,:-3], sr_data[:,-3])
-            score = gpmodel.score(sr_data[:,:-3], sr_data[:,-3])
+            formula = gpmodel.fit(sr_data[:,:-4], sr_data[:,-3])
+            score = gpmodel.score(sr_data[:,:-4], sr_data[:,-3])
             print( 'slope = ' + str(formula))
           
             with open(os.path.join('Segmented', 'A_formula derived by gplearn.txt'), 'w') as wfid:
