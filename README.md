@@ -2,8 +2,8 @@
 [![](https://img.shields.io/badge/PyPI-caobin-blue)](https://pypi.org/project/TCLR/)
 # TCLR 
 
+![WechatIMG65](https://user-images.githubusercontent.com/86995074/181872169-15e4f6fd-87ad-4a76-81f9-21de1a8e7012.jpeg =250x)
 
-<img src=" https://user-images.githubusercontent.com/86995074/181872029-34081bf3-e91e-4eef-ba10-0ee914d92aa6.jpeg " width="30%">
 
 ## TCLR, Version 1, October, 2021. 
 
