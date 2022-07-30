@@ -2,7 +2,8 @@
 [![](https://img.shields.io/badge/PyPI-caobin-blue)](https://pypi.org/project/TCLR/)
 # TCLR 
 
-![Screen Shot 2022-07-30 at 12 23 52](https://user-images.githubusercontent.com/86995074/181872225-f6c6f005-6459-47aa-aafe-022754d05b19.png)
+<img width="214" alt="Screen Shot 2022-07-30 at 22 31 40" src="https://user-images.githubusercontent.com/86995074/181919028-df0dfd96-46ee-44e9-a6bc-65fe10ac270e.png">
+
 
 
 
