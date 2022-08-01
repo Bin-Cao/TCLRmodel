@@ -1,5 +1,5 @@
 """
-    Tree Classifier for Linear Regression (TCLR) V1.4.7
+    Tree Classifier for Linear Regression (TCLR) V1.4.8
 
     TCLR is a novel tree model proposed by Prof.T-Y Zhang and Mr.Bin Cao et al. to capture the functional relationships
     between features and target, which partitions the feature space into a set of rectangles, and embody a specific function in each one.
@@ -112,7 +112,7 @@ def fea_tol(dataSet,feats,tolerance_list):
             __feaname = tolerance_list[i][0]
             __tolratio = float(tolerance_list[i][1])
             index = feats.index(__feaname)
-            if (dataSet[:,index].max() - dataSet[:,index].min())/dataSet[:,index].max() <= __tolratio:
+            if abs((dataSet[:,index].max() - dataSet[:,index].min())/dataSet[:,index].max()) <= __tolratio:
                 record += 1
         if record == len(tolerance_list):
             return True
@@ -177,7 +177,10 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         if node.lc is None:
             node.leaf_no = leaf_no
             leaf_no += 1
-            save_in_all = node.R >= threshold  # determine if this node is to save in all_dataset.csv
+            # determine if this node is to save in all_dataset.csv
+            save_in_all = False
+            if node.R >= threshold and fea_tol(node.data,feats,tolerance_list) == True:
+                save_in_all = True 
             write_csv(node, feats, save_in_all, correlation)
 
         return node, leaf_no
@@ -233,7 +236,10 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         if node.lc is None:
             node.leaf_no = leaf_no
             leaf_no += 1
-            save_in_all = node.R >= threshold  # determine if this node is to save in all_dataset.csv
+            # determine if this node is to save in all_dataset.csv
+            save_in_all = False
+            if node.R >= threshold and fea_tol(node.data,feats,tolerance_list) == True:
+                save_in_all = True 
             write_csv(node, feats, save_in_all, correlation)
 
         return node, leaf_no
@@ -285,7 +291,10 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         if node.lc is None:
             node.leaf_no = leaf_no
             leaf_no += 1
-            save_in_all = node.R >= threshold  # determine if this node is to save in all_dataset.csv
+            # determine if this node is to save in all_dataset.csv
+            save_in_all = False
+            if node.R >= threshold and fea_tol(node.data,feats,tolerance_list) == True:
+                save_in_all = True 
             write_csv(node, feats, save_in_all, correlation)
 
         return node, leaf_no
@@ -338,7 +347,10 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         if node.lc is None:
             node.leaf_no = leaf_no
             leaf_no += 1
-            save_in_all = node.R >= threshold  # determine if this node is to save in all_dataset.csv
+            # determine if this node is to save in all_dataset.csv
+            save_in_all = False
+            if node.R >= threshold and fea_tol(node.data,feats,tolerance_list) == True:
+                save_in_all = True 
             write_csv(node, feats, save_in_all, correlation)
 
         return node, leaf_no
