@@ -1,5 +1,5 @@
 """
-    Tree Classifier for Linear Regression (TCLR) V1.4.8
+    Tree Classifier for Linear Regression (TCLR) V1.4.9
 
     TCLR is a novel tree model proposed by Prof.T-Y Zhang and Mr.Bin Cao et al. to capture the functional relationships
     between features and target, which partitions the feature space into a set of rectangles, and embody a specific function in each one.
@@ -17,7 +17,8 @@
 """
 
 import math
-from re import T
+import re
+from tabnanny import check
 from textwrap import indent
 import time
 import copy
@@ -104,7 +105,7 @@ def splitDataSet(dataSet, axis, value):
             retDataSetB.append(featVec)
     return np.array(retDataSetA), np.array(retDataSetB)
 
-def fea_tol(dataSet,feats,tolerance_list):
+def fea_tol(dataSet,ori_dataSet,feats,tolerance_list):
     if len(tolerance_list) == None: return True
     else:
         record = 0
@@ -112,17 +113,29 @@ def fea_tol(dataSet,feats,tolerance_list):
             __feaname = tolerance_list[i][0]
             __tolratio = float(tolerance_list[i][1])
             index = feats.index(__feaname)
-            if abs((dataSet[:,index].max() - dataSet[:,index].min())/dataSet[:,index].max()) <= __tolratio:
+            if (dataSet[:,index].max() - dataSet[:,index].min()) / (ori_dataSet[:,index].max()- ori_dataSet[:,index].min()) <= __tolratio:
+                record += 1
+        if record == len(tolerance_list):
+            return True
+
+def fea_tol_split(dataSet,ori_dataSet,feats,tolerance_list,split_tol):
+    if len(tolerance_list) == None: return True
+    else:
+        record = 0
+        for i in range(len(tolerance_list)):
+            __feaname = tolerance_list[i][0]
+            __tolratio = float(tolerance_list[i][1])
+            criter = max(split_tol,__tolratio)
+            index = feats.index(__feaname)
+            if (dataSet[:,index].max() - dataSet[:,index].min()) / (ori_dataSet[:,index].max()- ori_dataSet[:,index].min()) <= criter:
                 record += 1
         if record == len(tolerance_list):
             return True
 
 
-
 # Capture the functional relationships between features and target
 # Partitions the feature space into a set of rectangles,
-def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc):
-
+def createTree(dataSet, ori_dataset,feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc,split_tol):
     # It is a  positive linear relationship
     if correlation == 'PearsonR(+)':
         node = Node(dataSet)
@@ -132,7 +145,7 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         __slope = stats.linregress(dataSet[:, -2], dataSet[:, -1])[0]
         node.slope = __slope
         node.intercept = stats.linregress(dataSet[:, -2], dataSet[:, -1])[1]
-        if bestR >= threshold and fea_tol(dataSet,feats,tolerance_list) == True:
+        if bestR >= threshold and fea_tol(dataSet,ori_dataset,feats,tolerance_list) == True:
             node.leaf_no = leaf_no
             leaf_no += 1
             write_csv(node, feats, True, correlation)
@@ -143,17 +156,21 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         bestFeature = -1
         bestValue = 0
 
+        check_valve = False
         for i in range(numFeatures):
             featList = [example[i] for example in dataSet]
             uniqueVals = sorted(list(set(featList)))
-
             for value in range(len(uniqueVals) - 1):
+                # constraints imposed on features  (greater tolerance in split process)
+                if not fea_tol_split(dataSet,ori_dataset,feats,tolerance_list,split_tol):
+                    continue
                 subDataSetA, subDataSetB = splitDataSet(dataSet, i, uniqueVals[value])
-
+                
                 if np.unique(subDataSetA[:, -2]).size <= minsize - 1 or np.unique(
                         subDataSetB[:, -2]).size <= minsize - 1:
                     continue
-
+                
+                check_valve = True
                 newRa = PearsonR(subDataSetA[:, -2], subDataSetA[:, -1])
                 newRb = PearsonR(subDataSetB[:, -2], subDataSetB[:, -1])
 
@@ -166,11 +183,36 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
                     rc = subDataSetB
                     bestFeature = i
                     bestValue = uniqueVals[value]
+                
+        if check_valve == False:
+            for i in range(numFeatures):
+                featList = [example[i] for example in dataSet]
+                uniqueVals = sorted(list(set(featList)))
+                for value in range(len(uniqueVals) - 1):
+                    subDataSetA, subDataSetB = splitDataSet(dataSet, i, uniqueVals[value])
+                    
+                    if np.unique(subDataSetA[:, -2]).size <= minsize - 1 or np.unique(
+                            subDataSetB[:, -2]).size <= minsize - 1:
+                        continue
+                    newRa = PearsonR(subDataSetA[:, -2], subDataSetA[:, -1])
+                    newRb = PearsonR(subDataSetB[:, -2], subDataSetB[:, -1])
+
+                    R = (newRa + newRb) / 2
+                    if R - bestR >= mininc:
+                        splitSuccess = True
+                        bestR = R
+                        lc = subDataSetA
+                        rc = subDataSetB
+                        bestFeature = i
+                        bestValue = uniqueVals[value]
+            else:
+                pass
+                        
 
         # The recursive boundary is unable to find a division node that can increase factor(R, MIC, R2) by mininc or more.
         if splitSuccess:
-            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation, tolerance_list,minsize, threshold, mininc)
-            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
+            node.lc, leaf_no = createTree(lc, ori_dataset,feats, leaf_no, correlation, tolerance_list,minsize, threshold, mininc,split_tol)
+            node.rc, leaf_no = createTree(rc, ori_dataset,feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc,split_tol)
             node.bestFeature, node.bestValue = bestFeature, bestValue
 
         # This node is leaf
@@ -179,7 +221,7 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
             leaf_no += 1
             # determine if this node is to save in all_dataset.csv
             save_in_all = False
-            if node.R >= threshold and fea_tol(node.data,feats,tolerance_list) == True:
+            if node.R >= threshold and fea_tol(node.data,ori_dataset,feats,tolerance_list) == True:
                 save_in_all = True 
             write_csv(node, feats, save_in_all, correlation)
 
@@ -193,7 +235,7 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         __slope = stats.linregress(dataSet[:, -2], dataSet[:, -1])[0]
         node.slope = __slope
         node.intercept = stats.linregress(dataSet[:, -2], dataSet[:, -1])[1]
-        if bestR <= -threshold and fea_tol(dataSet,feats,tolerance_list) == True:
+        if bestR <= -threshold and fea_tol(dataSet,ori_dataset,feats,tolerance_list) == True:
             node.leaf_no = leaf_no
             leaf_no += 1
             write_csv(node, feats, True, correlation)
@@ -204,17 +246,21 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         bestFeature = -1
         bestValue = 0
 
+        check_valve = False
         for i in range(numFeatures):
             featList = [example[i] for example in dataSet]
             uniqueVals = sorted(list(set(featList)))
-
             for value in range(len(uniqueVals) - 1):
+                # constraints imposed on features  (greater tolerance in split process)
+                if not fea_tol_split(dataSet,ori_dataset,feats,tolerance_list,split_tol):
+                    continue
                 subDataSetA, subDataSetB = splitDataSet(dataSet, i, uniqueVals[value])
 
                 if np.unique(subDataSetA[:, -2]).size <= minsize - 1 or np.unique(
                         subDataSetB[:, -2]).size <= minsize - 1:
                     continue
-                
+
+                check_valve = True
                 newRa = PearsonR(subDataSetA[:, -2], subDataSetA[:, -1])
                 newRb = PearsonR(subDataSetB[:, -2], subDataSetB[:, -1])
 
@@ -228,9 +274,34 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
                     bestFeature = i
                     bestValue = uniqueVals[value]
 
+        if check_valve == False:
+            for i in range(numFeatures):
+                featList = [example[i] for example in dataSet]
+                uniqueVals = sorted(list(set(featList)))
+                for value in range(len(uniqueVals) - 1):
+                    subDataSetA, subDataSetB = splitDataSet(dataSet, i, uniqueVals[value])
+
+                    if np.unique(subDataSetA[:, -2]).size <= minsize - 1 or np.unique(
+                            subDataSetB[:, -2]).size <= minsize - 1:
+                        continue
+                    
+                    newRa = PearsonR(subDataSetA[:, -2], subDataSetA[:, -1])
+                    newRb = PearsonR(subDataSetB[:, -2], subDataSetB[:, -1])
+
+                    R = (newRa + newRb) / 2
+
+                    if R - bestR <= - mininc:
+                        splitSuccess = True
+                        bestR = R
+                        lc = subDataSetA
+                        rc = subDataSetB
+                        bestFeature = i
+                        bestValue = uniqueVals[value]
+        else: pass
+
         if splitSuccess:
-            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
-            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
+            node.lc, leaf_no = createTree(lc, ori_dataset,feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc,split_tol)
+            node.rc, leaf_no = createTree(rc, ori_dataset,feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc,split_tol)
             node.bestFeature, node.bestValue = bestFeature, bestValue
 
         if node.lc is None:
@@ -238,7 +309,7 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
             leaf_no += 1
             # determine if this node is to save in all_dataset.csv
             save_in_all = False
-            if node.R >= threshold and fea_tol(node.data,feats,tolerance_list) == True:
+            if node.R >= threshold and fea_tol(node.data,ori_dataset,feats,tolerance_list) == True:
                 save_in_all = True 
             write_csv(node, feats, save_in_all, correlation)
 
@@ -249,7 +320,7 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         bestR = MIC(dataSet[:, -2], dataSet[:, -1])
         node.R = bestR
         node.slope == None
-        if bestR >= threshold and fea_tol(dataSet,feats,tolerance_list) == True:
+        if bestR >= threshold and fea_tol(dataSet,ori_dataset,feats,tolerance_list) == True:
             node.leaf_no = leaf_no
             leaf_no += 1
             write_csv(node, feats, True, correlation)
@@ -260,16 +331,20 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         bestFeature = -1
         bestValue = 0
 
+        check_valve = False
         for i in range(numFeatures):
             featList = [example[i] for example in dataSet]
             uniqueVals = sorted(list(set(featList)))
             for value in range(len(uniqueVals) - 1):
+                # constraints imposed on features  (greater tolerance in split process)
+                if not fea_tol_split(dataSet,ori_dataset,feats,tolerance_list,split_tol):
+                    continue
                 subDataSetA, subDataSetB = splitDataSet(dataSet, i, uniqueVals[value])
-
                 if np.unique(subDataSetA[:, -2]).size <= minsize - 1 or np.unique(
                         subDataSetB[:, -2]).size <= minsize - 1:
                     continue
-
+                
+                check_valve = True
                 newRa = MIC(subDataSetA[:, -2], subDataSetA[:, -1])
                 newRb = MIC(subDataSetB[:, -2], subDataSetB[:, -1])
 
@@ -283,9 +358,33 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
                     bestFeature = i
                     bestValue = uniqueVals[value]
 
+        if check_valve == False:
+            for i in range(numFeatures):
+                featList = [example[i] for example in dataSet]
+                uniqueVals = sorted(list(set(featList)))
+                for value in range(len(uniqueVals) - 1):
+                    subDataSetA, subDataSetB = splitDataSet(dataSet, i, uniqueVals[value])
+                    if np.unique(subDataSetA[:, -2]).size <= minsize - 1 or np.unique(
+                            subDataSetB[:, -2]).size <= minsize - 1:
+                        continue
+    
+                    newRa = MIC(subDataSetA[:, -2], subDataSetA[:, -1])
+                    newRb = MIC(subDataSetB[:, -2], subDataSetB[:, -1])
+
+                    R = (newRa + newRb) / 2
+
+                    if R - bestR >= mininc:
+                        splitSuccess = True
+                        bestR = R
+                        lc = subDataSetA
+                        rc = subDataSetB
+                        bestFeature = i
+                        bestValue = uniqueVals[value]
+        else: pass
+
         if splitSuccess:
-            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
-            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
+            node.lc, leaf_no = createTree(lc, ori_dataset,feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc,split_tol)
+            node.rc, leaf_no = createTree(rc,ori_dataset, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc,split_tol)
             node.bestFeature, node.bestValue = bestFeature, bestValue
 
         if node.lc is None:
@@ -293,7 +392,7 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
             leaf_no += 1
             # determine if this node is to save in all_dataset.csv
             save_in_all = False
-            if node.R >= threshold and fea_tol(node.data,feats,tolerance_list) == True:
+            if node.R >= threshold and fea_tol(node.data,ori_dataset,feats,tolerance_list) == True:
                 save_in_all = True 
             write_csv(node, feats, save_in_all, correlation)
 
@@ -304,7 +403,7 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         bestR = R2(dataSet[:, -2], dataSet[:, -1])
         node.R = bestR
         node.slope == None
-        if bestR >= threshold and fea_tol(dataSet,feats,tolerance_list) == True:
+        if bestR >= threshold and fea_tol(dataSet,ori_dataset,feats,tolerance_list) == True:
             node.leaf_no = leaf_no
             leaf_no += 1
             write_csv(node, feats, True, correlation)
@@ -315,17 +414,22 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
         bestFeature = -1
         bestValue = 0
 
+        check_valve = False
         for i in range(numFeatures):
             featList = [example[i] for example in dataSet]
             uniqueVals = sorted(list(set(featList)))
-
             for value in range(len(uniqueVals) - 1):
+                # constraints imposed on features  (greater tolerance in split process)
+                if not fea_tol_split(dataSet,ori_dataset,feats,tolerance_list,split_tol):
+                    continue
+
                 subDataSetA, subDataSetB = splitDataSet(dataSet, i, uniqueVals[value])
 
                 if np.unique(subDataSetA[:, -2]).size <= minsize - 1 or np.unique(
                         subDataSetB[:, -2]).size <= minsize - 1:
                     continue
 
+                check_valve = True
                 newRa = R2(subDataSetA[:, -2], subDataSetA[:, -1])
                 newRb = R2(subDataSetB[:, -2], subDataSetB[:, -1])
 
@@ -339,9 +443,32 @@ def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, thr
                     bestFeature = i
                     bestValue = uniqueVals[value]
 
+        if check_valve == False:
+            for i in range(numFeatures):
+                featList = [example[i] for example in dataSet]
+                uniqueVals = sorted(list(set(featList)))
+
+                for value in range(len(uniqueVals) - 1):
+                    if np.unique(subDataSetA[:, -2]).size <= minsize - 1 or np.unique(
+                            subDataSetB[:, -2]).size <= minsize - 1:
+                        continue
+                    newRa = R2(subDataSetA[:, -2], subDataSetA[:, -1])
+                    newRb = R2(subDataSetB[:, -2], subDataSetB[:, -1])
+
+                    R = (newRa + newRb) / 2
+
+                    if R - bestR >= mininc:
+                        splitSuccess = True
+                        bestR = R
+                        lc = subDataSetA
+                        rc = subDataSetB
+                        bestFeature = i
+                        bestValue = uniqueVals[value]
+        else: pass
+        
         if splitSuccess:
-            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation, tolerance_list,minsize, threshold, mininc)
-            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
+            node.lc, leaf_no = createTree(lc, ori_dataset,feats, leaf_no, correlation, tolerance_list,minsize, threshold, mininc,split_tol)
+            node.rc, leaf_no = createTree(rc, ori_dataset,feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc,split_tol)
             node.bestFeature, node.bestValue = bestFeature, bestValue
 
         if node.lc is None:
@@ -410,10 +537,11 @@ def write_csv(node, feats, save_in_all, correlation):
     _all_dataset.to_csv('Segmented/all_dataset.csv', index=False)
 
 
-def start(filePath, correlation='PearsonR(+)',tolerance_list = None ,minsize=3, threshold=0.95, mininc=0.01,
+def start(filePath, correlation='PearsonR(+)',tolerance_list = None ,minsize=3, threshold=0.95, mininc=0.01, split_tol = 0.8,
          gplearn = False, population_size = 500, generations = 100, verbose = 1, 
          metric = 'mean absolute error',
          function_set = ['add', 'sub', 'mul', 'div', 'log', 'sqrt', 'abs', 'neg','inv','sin','cos','tan', 'max', 'min']):
+    
     """
     :param correlation : {'PearsonR(+)','PearsonR(-)',''MIC','R2'}，default PearsonR(+).
             Methods:
@@ -461,6 +589,8 @@ def start(filePath, correlation='PearsonR(+)',tolerance_list = None ,minsize=3, 
             To avoid overfitting, threshold = 0.5 is suggested for MIC 0.5.
     
     :param mininc : Minimum expected gain of objective function (default=0.01)
+
+    :param split_tol : a float (default=0.8), constrained features value shound be narrowed in a minmimu ratio of split_tol on split path
 
     :param gplearn : Whether to call the embedded gplearn package of TCLR to regress formula (default=False).
     
@@ -520,7 +650,7 @@ def start(filePath, correlation='PearsonR(+)',tolerance_list = None ,minsize=3, 
 
     feats = [column for column in csvData]
     csvData = np.array(csvData)
-    root, _ = createTree(csvData, feats, 0, correlation,tolerance_list, minsize, threshold, mininc)
+    root, _ = createTree(csvData, csvData, feats, 0, correlation,tolerance_list, minsize, threshold, mininc, split_tol)
     
     print('All non-image results have been successfully saved!')
     print('________________________________________________________________________________','\n')
@@ -570,14 +700,19 @@ def start(filePath, correlation='PearsonR(+)',tolerance_list = None ,minsize=3, 
     elif gplearn == False:
         pass
     
-    # generate figure in pdf
-    warnings.filterwarnings('ignore')
-    dot = Digraph(comment='Result of TCLR')
-    render('A', root, dot, feats)
-    dot.render(
-        'Result of TCLR {year}.{month}.{day}-{hour}.{minute}'.format(year=namey, month=nameM, day=named, hour=nameh,
-                                                                     minute=namem))
 
-    return True
-
+    try:
+        # generate figure in pdf
+        warnings.filterwarnings('ignore')
+        dot = Digraph(comment='Result of TCLR')
+        render('A', root, dot, feats)
+        dot.render(
+            'Result of TCLR {year}.{month}.{day}-{hour}.{minute}'.format(year=namey, month=nameM, day=named, hour=nameh,
+                                                                        minute=namem))
+        return True
+    except :
+        print('Can not generate the Tree figure !')
+        print('Please make sure the Graphviz executables are on your systems')
+        return True 
+  
 

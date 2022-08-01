@@ -1,6 +1,7 @@
 #coding=utf-8
 from TCLR import TCLRalgorithm as model
 
+
 """
     :param correlation : {'PearsonR(+)','PearsonR(-)',''MIC','R2'}，default PearsonR(+).
             Methods:
@@ -22,6 +23,8 @@ from TCLR import TCLRalgorithm as model
             To avoid overfitting, threshold = 0.5 is suggested for MIC 0.5.
     
     :param mininc : Minimum expected gain of objective function (default=0.01)
+    
+    :param split_tol : a float (default=0.8), constrained features value shound be narrowed in a minmimu ratio of split_tol on split path
 
     :param gplearn : Whether to call the embedded gplearn package of TCLR to regress formula (default=False).
     
@@ -68,6 +71,7 @@ from TCLR import TCLRalgorithm as model
     DOI : 10.20517/jmi.2022.04
 """
 
+
 dataSet = "testdata.csv"
 correlation = 'PearsonR(+)'
 tolerance_list = [
@@ -76,6 +80,7 @@ tolerance_list = [
 minsize = 3
 threshold = 0.9
 mininc = 0.01
+split_tol = 0.8
 gplearn = True
 population_size = 500
 generations = 100
@@ -84,8 +89,9 @@ metric = 'mean absolute error'
 function_set = ['add', 'sub', 'mul', 'div', 'log', 'sqrt', 'abs', 'neg','inv','sin','cos','tan', 'max', 'min']
 
 
-model.start(dataSet, correlation, tolerance_list, minsize, threshold, mininc,
-            gplearn, population_size,generations,verbose,metric,function_set)
+model.start(filePath = dataSet, correlation = correlation, tolerance_list = tolerance_list, minsize = minsize, threshold = threshold,
+            mininc = mininc ,split_tol = split_tol, gplearn = gplearn,  population_size = population_size,
+            generations = generations,verbose = verbose, metric =metric, function_set =function_set)
 
 
 
