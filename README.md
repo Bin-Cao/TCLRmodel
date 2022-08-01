@@ -41,9 +41,9 @@ from TCLR import TCLRalgorithm as model
 
     :param tolerance_list: constraints imposed on features, default is null
             list shape in two dimensions, viz., [[constraint_1,tol_1],[constraint_2,tol_2]...]
-            constraint_1, constraint_2 （string） are the feature name ; 
+            constraint_1, constraint_2 （string） are the feature names ; 
             tol_1, tol_2 （float）are feature's tolerance ratios;
-            relative variation range of features must be within the tolerance;
+            relative variation range of feature values must be within the tolerance;
             example: tolerance_list = [['feature_name1',0.2],['feature_name2',0.1]].
             
     :param minsize : a int number (default=3), minimum unique values for linear features of data on each leaf.
