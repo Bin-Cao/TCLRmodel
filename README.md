@@ -32,7 +32,22 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 #coding=utf-8
 from TCLR import TCLRalgorithm as model
 
-"""
+
+dataSet = "testdata.csv"
+correlation = 'PearsonR(+)'
+minsize = 3
+threshold = 0.9
+mininc = 0.01
+split_tol = 0.8
+
+
+
+model.start(filePath = dataSet, correlation = correlation, minsize = minsize, threshold = threshold,mininc = mininc ,split_tol = split_tol,)
+
+```
+
+## note
+``` javascript
     :param correlation : {'PearsonR(+)','PearsonR(-)',''MIC','R2'}，default PearsonR(+).
             Methods:
             * PearsonR: (+)(-). for linear relationship.
@@ -78,31 +93,8 @@ from TCLR import TCLRalgorithm as model
     Algorithm Patent No. : 2021SR1951267, China
     Reference : Domain knowledge guided interpretive machine learning ——  Formula discovery for the oxidation behavior of Ferritic-Martensitic steels in supercritical water. Bin Cao et al., 2022, JMI, journal paper.
     DOI : 10.20517/jmi.2022.04
-"""
 
-dataSet = "testdata.csv"
-correlation = 'PearsonR(+)'
-tolerance_list = [
-    ['feature_name_1',0.001],['feature_name_2',0.001],
-]
-minsize = 3
-threshold = 0.9
-mininc = 0.01
-split_tol = 0.8
-gplearn = True
-population_size = 500
-generations = 100
-verbose = 1 
-metric = 'mean absolute error'
-function_set = ['add', 'sub', 'mul', 'div', 'log', 'sqrt', 'abs', 'neg','inv','sin','cos','tan', 'max', 'min']
-
-
-
-model.start(filePath = dataSet, correlation = correlation, tolerance_list = tolerance_list, minsize = minsize, threshold = threshold,
-            mininc = mininc ,split_tol = split_tol, gplearn = gplearn,  population_size = population_size,
-            generations = generations,verbose = verbose, metric =metric, function_set =function_set)
-
-```
+``` 
 
 output 运行结果: 
 + classification structure tree in pdf format（Result of TCLR.pdf) 图形结果
