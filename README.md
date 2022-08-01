@@ -81,7 +81,7 @@ from TCLR import TCLRalgorithm as model
 dataSet = "testdata.csv"
 correlation = 'PearsonR(+)'
 tolerance_list = [
-    ['E_Cr_split_feature_1',0.001],
+    ['feature_name_1',0.001],['feature_name_2',0.001],
 ]
 minsize = 3
 threshold = 0.9
@@ -121,8 +121,9 @@ TCLR V1.3 Jun, 2022.
 *Para: minsize - Minimum unique values for linear features of data on each leaf (Minimum number of data on each leaf before V1.3)*
 
 TCLR V1.4 Jun, 2022.
-*Integrated symbolic regression algorithm of gplearn package.
-Derive an analytical formula between features and solpes by gplearn* and *add a new parameter of tolerance_list, see document*
++ *Integrated symbolic regression algorithm of gplearn package.
+Derive an analytical formula between features and solpes by gplearn*
++ *add a new parameter of tolerance_list, see document*
 
 ## About / 更多
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
