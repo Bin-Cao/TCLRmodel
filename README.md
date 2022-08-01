@@ -26,7 +26,7 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
     pip install --upgrade TCLR
 
 ## Running / 运行
-### Ref. https://github.com/Bin-Cao/TCLRmodel/tree/main/Source%20Code
+### Ref. https://github.com/Bin-Cao/TCLRmodel/tree/main/Examples/Execution%20template
 
 ``` javascript
 #coding=utf-8
