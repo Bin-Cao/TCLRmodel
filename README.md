@@ -29,9 +29,9 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 ### Ref. https://github.com/Bin-Cao/TCLRmodel/tree/main/Source%20Code
 
 ``` javascript
-# coding=utf-8
-
+#coding=utf-8
 from TCLR import TCLRalgorithm as model
+
 """
     :param correlation : {'PearsonR(+)','PearsonR(-)',''MIC','R2'}，default PearsonR(+).
             Methods:
@@ -39,6 +39,13 @@ from TCLR import TCLRalgorithm as model
             * MIC for no-linear relationship.
             * R2 for no-linear relationship.
 
+    :param tolerance_list: constraints imposed on features, default is null
+            list shape in two dimensions, viz., [[constraint_1,tol_1],[constraint_2,tol_2]...]
+            constraint_1, constraint_2 （string） are the feature name ; 
+            tol_1, tol_2 （float）are feature's tolerance ratios;
+            relative variation range of features must be within the tolerance;
+            example: tolerance_list = [['feature_name1',0.2],['feature_name2',0.1]].
+            
     :param minsize : a int number (default=3), minimum unique values for linear features of data on each leaf.
     
     :param threshold : a float (default=0.9), less than or equal to 1, default 0.95 for PearsonR.
@@ -47,7 +54,7 @@ from TCLR import TCLRalgorithm as model
     
     :param mininc : Minimum expected gain of objective function (default=0.01)
 
-    :param gplearn : Whether to call the embeded gplearn package of TCLR to regress formula (default=False).
+    :param gplearn : Whether to call the embedded gplearn package of TCLR to regress formula (default=False).
     
     :param population_size : integer, optional (default=500), the number of programs in each generation.
     
@@ -62,11 +69,20 @@ from TCLR import TCLRalgorithm as model
             - 'rmse' for root mean squared error.
             - 'pearson', for Pearson's product-moment correlation coefficient.
             - 'spearman' for Spearman's rank-order correlation coefficient.
-    Reference :  DOI : 10.20517/jmi.2022.04
+    
+    :param function_set : iterable, optional (default=['add', 'sub', 'mul', 'div', 'log', 'sqrt', 
+                                               'abs', 'neg','inv','sin','cos','tan', 'max', 'min'])
+
+    Algorithm Patent No. : 2021SR1951267, China
+    Reference : Domain knowledge guided interpretive machine learning ——  Formula discovery for the oxidation behavior of Ferritic-Martensitic steels in supercritical water. Bin Cao et al., 2022, JMI, journal paper.
+    DOI : 10.20517/jmi.2022.04
 """
 
 dataSet = "testdata.csv"
 correlation = 'PearsonR(+)'
+tolerance_list = [
+    ['E_Cr_split_feature_1',0.001],
+]
 minsize = 3
 threshold = 0.9
 mininc = 0.01
@@ -78,8 +94,8 @@ metric = 'mean absolute error'
 function_set = ['add', 'sub', 'mul', 'div', 'log', 'sqrt', 'abs', 'neg','inv','sin','cos','tan', 'max', 'min']
 
 
-model.start(dataSet, correlation, minsize, threshold, mininc, 
-            gplearn, population_size,generations,verbose,metric,function_set)
+
+model.start(dataSet, correlation, tolerance_list, minsize, threshold, mininc,gplearn, population_size,generations,verbose,metric,function_set)
 
 ```
 
@@ -106,7 +122,7 @@ TCLR V1.3 Jun, 2022.
 
 TCLR V1.4 Jun, 2022.
 *Integrated symbolic regression algorithm of gplearn package.
-Derive an analytical formula between features and solpes by gplearn*
+Derive an analytical formula between features and solpes by gplearn* and *add a new parameter of tolerance_list, see document*
 
 ## About / 更多
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao

@@ -1,5 +1,5 @@
 """
-    Tree Classifier for Linear Regression (TCLR) V1.4.6
+    Tree Classifier for Linear Regression (TCLR) V1.4.7
 
     TCLR is a novel tree model proposed by Prof.T-Y Zhang and Mr.Bin Cao et al. to capture the functional relationships
     between features and target, which partitions the feature space into a set of rectangles, and embody a specific function in each one.
@@ -17,6 +17,8 @@
 """
 
 import math
+from re import T
+from textwrap import indent
 import time
 import copy
 import os
@@ -102,10 +104,24 @@ def splitDataSet(dataSet, axis, value):
             retDataSetB.append(featVec)
     return np.array(retDataSetA), np.array(retDataSetB)
 
+def fea_tol(dataSet,feats,tolerance_list):
+    if len(tolerance_list) == None: return True
+    else:
+        record = 0
+        for i in range(len(tolerance_list)):
+            __feaname = tolerance_list[i][0]
+            __tolratio = float(tolerance_list[i][1])
+            index = feats.index(__feaname)
+            if (dataSet[:,index].max() - dataSet[:,index].min())/dataSet[:,index].max() <= __tolratio:
+                record += 1
+        if record == len(tolerance_list):
+            return True
+
+
 
 # Capture the functional relationships between features and target
 # Partitions the feature space into a set of rectangles,
-def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc):
+def createTree(dataSet, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc):
 
     # It is a  positive linear relationship
     if correlation == 'PearsonR(+)':
@@ -116,7 +132,7 @@ def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc)
         __slope = stats.linregress(dataSet[:, -2], dataSet[:, -1])[0]
         node.slope = __slope
         node.intercept = stats.linregress(dataSet[:, -2], dataSet[:, -1])[1]
-        if bestR >= threshold:
+        if bestR >= threshold and fea_tol(dataSet,feats,tolerance_list) == True:
             node.leaf_no = leaf_no
             leaf_no += 1
             write_csv(node, feats, True, correlation)
@@ -153,8 +169,8 @@ def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc)
 
         # The recursive boundary is unable to find a division node that can increase factor(R, MIC, R2) by mininc or more.
         if splitSuccess:
-            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation, minsize, threshold, mininc)
-            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation, minsize, threshold, mininc)
+            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation, tolerance_list,minsize, threshold, mininc)
+            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
             node.bestFeature, node.bestValue = bestFeature, bestValue
 
         # This node is leaf
@@ -174,7 +190,7 @@ def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc)
         __slope = stats.linregress(dataSet[:, -2], dataSet[:, -1])[0]
         node.slope = __slope
         node.intercept = stats.linregress(dataSet[:, -2], dataSet[:, -1])[1]
-        if bestR <= -threshold:
+        if bestR <= -threshold and fea_tol(dataSet,feats,tolerance_list) == True:
             node.leaf_no = leaf_no
             leaf_no += 1
             write_csv(node, feats, True, correlation)
@@ -195,13 +211,13 @@ def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc)
                 if np.unique(subDataSetA[:, -2]).size <= minsize - 1 or np.unique(
                         subDataSetB[:, -2]).size <= minsize - 1:
                     continue
-
+                
                 newRa = PearsonR(subDataSetA[:, -2], subDataSetA[:, -1])
                 newRb = PearsonR(subDataSetB[:, -2], subDataSetB[:, -1])
 
                 R = (newRa + newRb) / 2
 
-                if R - bestR <= -mininc:
+                if R - bestR <= - mininc:
                     splitSuccess = True
                     bestR = R
                     lc = subDataSetA
@@ -210,8 +226,8 @@ def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc)
                     bestValue = uniqueVals[value]
 
         if splitSuccess:
-            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation, minsize, threshold, mininc)
-            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation, minsize, threshold, mininc)
+            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
+            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
             node.bestFeature, node.bestValue = bestFeature, bestValue
 
         if node.lc is None:
@@ -227,7 +243,7 @@ def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc)
         bestR = MIC(dataSet[:, -2], dataSet[:, -1])
         node.R = bestR
         node.slope == None
-        if bestR >= threshold:
+        if bestR >= threshold and fea_tol(dataSet,feats,tolerance_list) == True:
             node.leaf_no = leaf_no
             leaf_no += 1
             write_csv(node, feats, True, correlation)
@@ -262,8 +278,8 @@ def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc)
                     bestValue = uniqueVals[value]
 
         if splitSuccess:
-            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation, minsize, threshold, mininc)
-            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation, minsize, threshold, mininc)
+            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
+            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
             node.bestFeature, node.bestValue = bestFeature, bestValue
 
         if node.lc is None:
@@ -279,7 +295,7 @@ def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc)
         bestR = R2(dataSet[:, -2], dataSet[:, -1])
         node.R = bestR
         node.slope == None
-        if bestR >= threshold:
+        if bestR >= threshold and fea_tol(dataSet,feats,tolerance_list) == True:
             node.leaf_no = leaf_no
             leaf_no += 1
             write_csv(node, feats, True, correlation)
@@ -315,8 +331,8 @@ def createTree(dataSet, feats, leaf_no, correlation, minsize, threshold, mininc)
                     bestValue = uniqueVals[value]
 
         if splitSuccess:
-            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation, minsize, threshold, mininc)
-            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation, minsize, threshold, mininc)
+            node.lc, leaf_no = createTree(lc, feats, leaf_no, correlation, tolerance_list,minsize, threshold, mininc)
+            node.rc, leaf_no = createTree(rc, feats, leaf_no, correlation,tolerance_list, minsize, threshold, mininc)
             node.bestFeature, node.bestValue = bestFeature, bestValue
 
         if node.lc is None:
@@ -382,7 +398,7 @@ def write_csv(node, feats, save_in_all, correlation):
     _all_dataset.to_csv('Segmented/all_dataset.csv', index=False)
 
 
-def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc=0.01,
+def start(filePath, correlation='PearsonR(+)',tolerance_list = None ,minsize=3, threshold=0.95, mininc=0.01,
          gplearn = False, population_size = 500, generations = 100, verbose = 1, 
          metric = 'mean absolute error',
          function_set = ['add', 'sub', 'mul', 'div', 'log', 'sqrt', 'abs', 'neg','inv','sin','cos','tan', 'max', 'min']):
@@ -419,6 +435,13 @@ def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc
             Definition from Wikipedia ：https://en.wikipedia.org/wiki/Coefficient_of_determination
             R2 = 1 - SSres / SStot. Its value may be a negative one for poor correlation.
  
+    :param tolerance_list: constraints imposed on features, default is null
+            list shape in two dimensions, viz., [[constraint_1,tol_1],[constraint_2,tol_2]...]
+            constraint_1, constraint_2 （string） are the feature name ; 
+            tol_1, tol_2 （float）are feature's tolerance ratios;
+            relative variation range of features must be within the tolerance;
+            example: tolerance_list = [['feature_name1',0.2],['feature_name2',0.1]].
+
     :param minsize : a int number (default=3), minimum unique values for linear features of data on each leaf.
     
     :param threshold : a float (default=0.9), less than or equal to 1, default 0.95 for PearsonR.
@@ -427,7 +450,7 @@ def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc
     
     :param mininc : Minimum expected gain of objective function (default=0.01)
 
-    :param gplearn : Whether to call the embeded gplearn package of TCLR to regress formula (default=False).
+    :param gplearn : Whether to call the embedded gplearn package of TCLR to regress formula (default=False).
     
     :param population_size : integer, optional (default=500), the number of programs in each generation.
     
@@ -485,7 +508,7 @@ def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc
 
     feats = [column for column in csvData]
     csvData = np.array(csvData)
-    root, _ = createTree(csvData, feats, 0, correlation, minsize, threshold, mininc)
+    root, _ = createTree(csvData, feats, 0, correlation,tolerance_list, minsize, threshold, mininc)
     
     print('All non-image results have been successfully saved!')
     print('________________________________________________________________________________','\n')
@@ -534,9 +557,7 @@ def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc
             
     elif gplearn == False:
         pass
-
     
-
     # generate figure in pdf
     warnings.filterwarnings('ignore')
     dot = Digraph(comment='Result of TCLR')

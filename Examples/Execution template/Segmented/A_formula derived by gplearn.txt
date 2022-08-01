@@ -1,7 +1,7 @@
 Formula : 
-sqrt(1/RT_split_feature_3)
+inv(log(E_Cr_split_feature_1))
 Fitness : 
-mean absolute error = 0.09576571128312472
+mean absolute error = 0.01614816562985355
 
 
 _______________________________________________________________________________
