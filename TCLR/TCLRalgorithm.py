@@ -1,5 +1,5 @@
 """
-    Tree Classifier for Linear Regression (TCLR) V1.4.10
+    Tree Classifier for Linear Regression (TCLR) V1.4.11
 
     TCLR is a novel tree model proposed by Prof.T-Y Zhang and Mr.Bin Cao et al. to capture the functional relationships
     between features and target, which partitions the feature space into a set of rectangles, and embody a specific function in each one.
@@ -129,7 +129,7 @@ def fea_tol_split(dataSet,ori_dataSet,feats,tolerance_list,split_tol):
             index = feats.index(__feaname)
             if (dataSet[:,index].max() - dataSet[:,index].min()) / (ori_dataSet[:,index].max()- ori_dataSet[:,index].min()) <= criter:
                 record += 1
-        if record != 0:
+        if record > int(0.5*len(tolerance_list)):
             return True
 
 
@@ -170,13 +170,13 @@ def createTree(dataSet, ori_dataset,feats, leaf_no, correlation,tolerance_list, 
                         subDataSetB[:, -2]).size <= minsize - 1:
                     continue
                 
-                check_valve = True
                 newRa = PearsonR(subDataSetA[:, -2], subDataSetA[:, -1])
                 newRb = PearsonR(subDataSetB[:, -2], subDataSetB[:, -1])
 
                 R = (newRa + newRb) / 2
 
                 if R - bestR >= mininc:
+                    check_valve = True
                     splitSuccess = True
                     bestR = R
                     lc = subDataSetA
@@ -260,13 +260,14 @@ def createTree(dataSet, ori_dataset,feats, leaf_no, correlation,tolerance_list, 
                         subDataSetB[:, -2]).size <= minsize - 1:
                     continue
 
-                check_valve = True
+                
                 newRa = PearsonR(subDataSetA[:, -2], subDataSetA[:, -1])
                 newRb = PearsonR(subDataSetB[:, -2], subDataSetB[:, -1])
 
                 R = (newRa + newRb) / 2
 
                 if R - bestR <= - mininc:
+                    check_valve = True
                     splitSuccess = True
                     bestR = R
                     lc = subDataSetA
@@ -344,13 +345,13 @@ def createTree(dataSet, ori_dataset,feats, leaf_no, correlation,tolerance_list, 
                         subDataSetB[:, -2]).size <= minsize - 1:
                     continue
                 
-                check_valve = True
                 newRa = MIC(subDataSetA[:, -2], subDataSetA[:, -1])
                 newRb = MIC(subDataSetB[:, -2], subDataSetB[:, -1])
 
                 R = (newRa + newRb) / 2
 
                 if R - bestR >= mininc:
+                    check_valve = True
                     splitSuccess = True
                     bestR = R
                     lc = subDataSetA
@@ -429,13 +430,13 @@ def createTree(dataSet, ori_dataset,feats, leaf_no, correlation,tolerance_list, 
                         subDataSetB[:, -2]).size <= minsize - 1:
                     continue
 
-                check_valve = True
                 newRa = R2(subDataSetA[:, -2], subDataSetA[:, -1])
                 newRb = R2(subDataSetB[:, -2], subDataSetB[:, -1])
 
                 R = (newRa + newRb) / 2
 
                 if R - bestR >= mininc:
+                    check_valve = True
                     splitSuccess = True
                     bestR = R
                     lc = subDataSetA
