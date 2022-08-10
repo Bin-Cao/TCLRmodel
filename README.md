@@ -55,10 +55,12 @@ model.start(filePath = dataSet, correlation = correlation, minsize = minsize, th
         * R2 for no-linear relationship.
 
 :param tolerance_list: constraints imposed on features, default is null
-        list shape in two dimensions, viz., [[constraint_1,tol_1],[constraint_2,tol_2]...]
-        constraint_1, constraint_2 （string） are the feature names ; 
-        tol_1, tol_2 （float）are feature's tolerance ratios;
-        relative variation range of feature values must be within the tolerance;
+        list shape in two dimensions, viz., [['feature_name1',tol_1],['feature_name2',tol_2]...]
+        'feature_name1', 'feature_name2' （string） are names of input features;
+        tol_1, tol_2 （float, between 0 to 1）are feature's tolerance ratios;
+        the variations of feature values on each leaf must be in the tolerance;
+        if tol_1 = 0, the value of feature 'feature_name1' must be a constant on each leaf,
+        if tol_1 = 1, there is no constraints on value of feature 'feature_name1';
         example: tolerance_list = [['feature_name1',0.2],['feature_name2',0.1]].
 
 :param minsize : a int number (default=3), minimum unique values for linear features of data on each leaf.
