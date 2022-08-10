@@ -1,5 +1,5 @@
 """
-    Tree Classifier for Linear Regression (TCLR) V1.4.11
+    Tree Classifier for Linear Regression (TCLR) V1.4.12
 
     TCLR is a novel tree model proposed by Prof.T-Y Zhang and Mr.Bin Cao et al. to capture the functional relationships
     between features and target, which partitions the feature space into a set of rectangles, and embody a specific function in each one.
@@ -106,7 +106,7 @@ def splitDataSet(dataSet, axis, value):
     return np.array(retDataSetA), np.array(retDataSetB)
 
 def fea_tol(dataSet,ori_dataSet,feats,tolerance_list):
-    if len(tolerance_list) == None: return True
+    if tolerance_list == None: return True
     else:
         record = 0
         for i in range(len(tolerance_list)):
@@ -119,7 +119,7 @@ def fea_tol(dataSet,ori_dataSet,feats,tolerance_list):
             return True
 
 def fea_tol_split(dataSet,ori_dataSet,feats,tolerance_list,split_tol):
-    if len(tolerance_list) == None: return True
+    if tolerance_list == None: return True
     else:
         record = 0
         for i in range(len(tolerance_list)):
