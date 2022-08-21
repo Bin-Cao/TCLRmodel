@@ -1,5 +1,5 @@
 """
-    Tree Classifier for Linear Regression (TCLR) V1.4.13
+    Tree Classifier for Linear Regression (TCLR) V1.5.0
 
     TCLR is a novel tree model proposed by Prof.T-Y Zhang and Mr.Bin Cao et al. to capture the functional relationships
     between features and target, which partitions the feature space into a set of rectangles, and embody a specific function in each one.
@@ -538,7 +538,7 @@ def write_csv(node, feats, save_in_all, correlation):
     _all_dataset.to_csv('Segmented/all_dataset.csv', index=False)
 
 
-def start(filePath, correlation='PearsonR(+)',tolerance_list = None ,minsize=3, threshold=0.95, mininc=0.01, split_tol = 0.8,
+def start(filePath, correlation='PearsonR(+)',tolerance_list = None , gpl_dummyfea = None, minsize=3, threshold=0.95, mininc=0.01, split_tol = 0.8,
          gplearn = False, population_size = 500, generations = 100, verbose = 1, 
          metric = 'mean absolute error',
          function_set = ['add', 'sub', 'mul', 'div', 'log', 'sqrt', 'abs', 'neg','inv','sin','cos','tan', 'max', 'min']):
@@ -584,6 +584,10 @@ def start(filePath, correlation='PearsonR(+)',tolerance_list = None ,minsize=3, 
             if tol_1 = 0, the value of feature 'feature_name1' must be a constant on each leaf,
             if tol_1 = 1, there is no constraints on value of feature 'feature_name1';
             example: tolerance_list = [['feature_name1',0.2],['feature_name2',0.1]].
+
+    :param gpl_dummyfea: dummy features in gpleran regression, default is null
+            list shape in one dimension, viz., ['feature_name1','feature_name2',...]
+            dummy features : 'feature_name1','feature_name2',... are not used anymore in gpleran regression 
 
     :param minsize : a int number (default=3), minimum unique values for linear features of data on each leaf.
     
@@ -667,14 +671,38 @@ def start(filePath, correlation='PearsonR(+)',tolerance_list = None ,minsize=3, 
             sr_data = pd.read_csv('Segmented/all_dataset.csv')
             sr_featurname = sr_data.columns
             sr_data = np.array(sr_data)
-            gpmodel = genetic.SymbolicRegressor(
-                population_size = population_size, generations = generations, 
-                verbose = verbose,feature_names = sr_featurname[:-4],function_set = function_set,
-                metric = metric
-                 )
-            formula = gpmodel.fit(sr_data[:,:-4], sr_data[:,-3])
-            score = gpmodel.score(sr_data[:,:-4], sr_data[:,-3])
-            print( 'slope = ' + str(formula))
+
+            if gpl_dummyfea == None: 
+
+                gpmodel = genetic.SymbolicRegressor(
+                    population_size = population_size, generations = generations, 
+                    verbose = verbose,feature_names = sr_featurname[:-4],function_set = function_set,
+                    metric = metric
+                    )
+                formula = gpmodel.fit(sr_data[:,:-4], sr_data[:,-3])
+                score = gpmodel.score(sr_data[:,:-4], sr_data[:,-3])
+                print( 'slope = ' + str(formula))
+
+            else:
+                # fea_num --> fea_loc
+                dummyfea = []
+                for i in range(len(gpl_dummyfea)):
+                    index = feats.index(gpl_dummyfea[i])
+                    dummyfea.append(index)
+                # remove fea_loc
+                index_array = [i for i in range(len(sr_featurname)-4)]
+                for i in range(len(gpl_dummyfea)):
+                    index_array.remove(dummyfea[i])
+                
+                gpmodel = genetic.SymbolicRegressor(
+                    population_size = population_size, generations = generations, 
+                    verbose = verbose,feature_names = sr_featurname[index_array],function_set = function_set,
+                    metric = metric
+                    )
+                formula = gpmodel.fit(sr_data[:,index_array], sr_data[:,-3])
+                score = gpmodel.score(sr_data[:,index_array], sr_data[:,-3])
+                print( 'slope = ' + str(formula))
+
           
             with open(os.path.join('Segmented', 'A_formula derived by gplearn.txt'), 'w') as wfid:
                     print('Formula : ', file=wfid)

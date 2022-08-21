@@ -15,6 +15,10 @@ from TCLR import TCLRalgorithm as model
             tol_1, tol_2 （float）are feature's tolerance ratios;
             relative variation range of features must be within the tolerance;
             example: tolerance_list = [['feature_name1',0.2],['feature_name2',0.1]].
+    
+    :param gpl_dummyfea: dummy features in gpleran regression, default is null
+            list shape in one dimension, viz., ['feature_name1','feature_name2',...]
+            dummy features : 'feature_name1','feature_name2',... are not used anymore in gpleran regression     
             
     :param minsize : a int number (default=3), minimum unique values for linear features of data on each leaf.
     
@@ -77,6 +81,8 @@ correlation = 'PearsonR(+)'
 tolerance_list = [
     ['E_Cr_split_feature_1',0.001],
 ]
+
+gpl_dummyfea = ['ln(t)_split_feature_4',]
 minsize = 3
 threshold = 0.9
 mininc = 0.01
@@ -89,7 +95,7 @@ metric = 'mean absolute error'
 function_set = ['add', 'sub', 'mul', 'div', 'log', 'sqrt', 'abs', 'neg','inv','sin','cos','tan', 'max', 'min']
 
 
-model.start(filePath = dataSet, correlation = correlation, tolerance_list = tolerance_list, minsize = minsize, threshold = threshold,
+model.start(filePath = dataSet, correlation = correlation, tolerance_list = tolerance_list, gpl_dummyfea = gpl_dummyfea, minsize = minsize, threshold = threshold,
             mininc = mininc ,split_tol = split_tol, gplearn = gplearn,  population_size = population_size,
             generations = generations,verbose = verbose, metric =metric, function_set =function_set)
 

@@ -63,6 +63,10 @@ model.start(filePath = dataSet, correlation = correlation, minsize = minsize, th
         if tol_1 = 1, there is no constraints on value of feature 'feature_name1';
         example: tolerance_list = [['feature_name1',0.2],['feature_name2',0.1]].
 
+:param gpl_dummyfea: dummy features in gpleran regression, default is null
+        list shape in one dimension, viz., ['feature_name1','feature_name2',...]
+        dummy features : 'feature_name1','feature_name2',... are not used anymore in gpleran regression 
+
 :param minsize : a int number (default=3), minimum unique values for linear features of data on each leaf.
 
 :param threshold : a float (default=0.9), less than or equal to 1, default 0.95 for PearsonR.
@@ -123,6 +127,9 @@ TCLR V1.4 Jun, 2022.
 + *Integrated symbolic regression algorithm of gplearn package.
 Derive an analytical formula between features and solpes by gplearn*
 + *add a new parameter of tolerance_list, see document*
+
+TCLR V1.5 Aug, 2022.
++ *add a new parameter of gpl_dummyfea, see document*
 
 ## About / 更多
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
