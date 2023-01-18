@@ -43,8 +43,6 @@ threshold = 0.9
 mininc = 0.01
 split_tol = 0.8
 
-
-
 model.start(filePath = dataSet, correlation = correlation, minsize = minsize, threshold = threshold,mininc = mininc ,split_tol = split_tol,)
 
 ```
