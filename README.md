@@ -29,7 +29,7 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
     pip install --upgrade TCLR
 
 ## Running / 运行
-### Ref. https://github.com/Bin-Cao/TCLRmodel/tree/main/Examples/Execution%20template
+### see Template
 
 ``` javascript
 #coding=utf-8
@@ -42,8 +42,6 @@ minsize = 3
 threshold = 0.9
 mininc = 0.01
 split_tol = 0.8
-
-
 
 model.start(filePath = dataSet, correlation = correlation, minsize = minsize, threshold = threshold,mininc = mininc ,split_tol = split_tol,)
 
