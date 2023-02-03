@@ -16,7 +16,6 @@ TCLR算法通过提供的数据集得到研究变量和时间指数等物理变�
 
 Reference :  
 + (JMI) Doi : http://dx.doi.org/10.20517/jmi.2022.04
-+ (JMST) Doi : 10.2139/ssrn.4340379
 
 Cite :
 + Cao B, Yang S, Sun A, Dong Z, Zhang TY. Domain knowledge-guided interpretive machine learning: formula discovery for the oxidation behavior of ferritic-martensitic steels in supercritical water. J Mater Inf 2022;2:4. http://dx.doi.org/10.20517/jmi.2022.04
