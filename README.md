@@ -24,7 +24,10 @@ Written using Python, which is suitable for operating systems, e.g., Windows/Lin
 
 ## Installing / 安装
     pip install TCLR 
-
+    
+## Checking / 查看
+    pip show TCLR 
+    
 ## Updating / 更新
     pip install --upgrade TCLR
 
