@@ -143,5 +143,6 @@ TCLR V1.5 Aug, 2022.
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
 (bcao@shu.edu.cn) in case of any problems/comments/suggestions in using the code. 
 
-欢迎与我联系，开展交流合作：曹斌（bcao@shu.edu.cn）
+## Contributing / 共建
+Contribution and suggestions are always welcome. In addition, we are also looking for research collaborations. You can submit issues for suggestions, questions, bugs, and feature requests, or submit pull requests to contribute directly. You can also contact the authors for research collaboration.
 
