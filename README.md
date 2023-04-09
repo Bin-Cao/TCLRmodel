@@ -20,7 +20,9 @@ Reference :
 
 Papers related : [![](https://img.shields.io/badge/Refs-TCLR-yellowgreen)](https://scholar.google.com.hk/scholar?cites=13374282506807262836&as_sdt=2005&sciodt=0,5&hl=zh-CN)
 
-<img width="403" alt="Screenshot 2023-04-09 at 11 34 37" src="https://user-images.githubusercontent.com/86995074/230752769-e63b0f6c-d47d-43d0-83e0-049096651362.png">
+<img width="1044" alt="Screenshot 2023-04-09 at 11 34 48" src="https://user-images.githubusercontent.com/86995074/230752794-54903df8-030b-4630-a1aa-5b67a135c0e5.png">
+
+
 Cite :
 + Cao B, Yang S, Sun A, Dong Z, Zhang TY. Domain knowledge-guided interpretive machine learning: formula discovery for the oxidation behavior of ferritic-martensitic steels in supercritical water. J Mater Inf 2022;2:4. http://dx.doi.org/10.20517/jmi.2022.04
 
