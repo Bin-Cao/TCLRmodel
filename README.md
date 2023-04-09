@@ -9,9 +9,7 @@ Source code : [![](https://img.shields.io/badge/PyPI-caobin-blue)](https://pypi.
 see 📒 [TCLR](https://tclr.netlify.app) (Click to view）
 
 
-## TCLR, Version 1, October, 2021. 
-
-Tree-Classifier for Linear Regression (TCLR) is a novel Machine learning model to capture the functional relationships between features and a target based on correlation. see Template.
+By incorporating the TCLR into a thermodynamic kinetic framework, it becomes possible to accurately predict the rates of chemical reactions as a function of temperature, pressure, and other system variables. This can be useful in a variety of fields, including materials science, chemical engineering, and biochemistry, where accurate modeling of reaction rates is essential for the design and optimization of chemical processes.
 
 
 TCLR算法通过提供的数据集得到研究变量和时间指数等物理变量之间的显示公式，适用于腐蚀、蠕变等满足动力学或者热力学的物理过程。通过最大化激活能和最小化时间指数可以高效地设计具有高耐腐蚀等优异性能的合金。最新版本V1.4，附有安装说明（用户手册）和运行模版（例子）。
@@ -59,61 +57,7 @@ split_tol = 0.8
 model.start(filePath = dataSet, correlation = correlation, minsize = minsize, threshold = threshold,
             mininc = mininc ,split_tol = split_tol,)
 
-
 ```
-
-### note
-``` javascript
-:param correlation : {'PearsonR(+)','PearsonR(-)',''MIC','R2'}，default PearsonR(+).
-        Methods:
-        * PearsonR: (+)(-). for linear relationship.
-        * MIC for no-linear relationship.
-        * R2 for no-linear relationship.
-
-:param tolerance_list: constraints imposed on features, default is null
-        list shape in two dimensions, viz., [['feature_name1',tol_1],['feature_name2',tol_2]...]
-        'feature_name1', 'feature_name2' （string） are names of input features;
-        tol_1, tol_2 （float, between 0 to 1）are feature's tolerance ratios;
-        the variations of feature values on each leaf must be in the tolerance;
-        if tol_1 = 0, the value of feature 'feature_name1' must be a constant on each leaf,
-        if tol_1 = 1, there is no constraints on value of feature 'feature_name1';
-        example: tolerance_list = [['feature_name1',0.2],['feature_name2',0.1]].
-
-:param gpl_dummyfea: dummy features in gpleran regression, default is null
-        list shape in one dimension, viz., ['feature_name1','feature_name2',...]
-        dummy features : 'feature_name1','feature_name2',... are not used anymore in gpleran regression 
-
-:param minsize : a int number (default=3), minimum unique values for linear features of data on each leaf.
-
-:param threshold : a float (default=0.9), less than or equal to 1, default 0.95 for PearsonR.
-        In the process of dividing the dataset, the smallest relevant index allowed in the you research.
-        To avoid overfitting, threshold = 0.5 is suggested for MIC 0.5.
-
-:param mininc : Minimum expected gain of objective function (default=0.01)
-
-:param split_tol : a float (default=0.8), constrained features value shound be narrowed in a minmimu ratio of split_tol on split path
-
-:param gplearn : Whether to call the embedded gplearn package of TCLR to regress formula (default=False).
-
-:param population_size : integer, optional (default=500), the number of programs in each generation.
-
-:param generations : integer, optional (default=100),the number of generations to evolve.
-
-:param verbose : int, optional (default=0). Controls the verbosity of the evolution building process.
-
-:param metric : str, optional (default='mean absolute error')
-        The name of the raw fitness metric. Available options include:
-        - 'mean absolute error'.
-        - 'mse' for mean squared error.
-        - 'rmse' for root mean squared error.
-        - 'pearson', for Pearson's product-moment correlation coefficient.
-        - 'spearman' for Spearman's rank-order correlation coefficient.
-
-:param function_set : iterable, optional (default=['add', 'sub', 'mul', 'div', 'log', 'sqrt', 
-                                           'abs', 'neg','inv','sin','cos','tan', 'max', 'min'])
-
-``` 
-
 
 
 ## Update log / 日志
