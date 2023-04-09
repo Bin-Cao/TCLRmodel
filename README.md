@@ -28,7 +28,7 @@ Reference :
 
 Papers related : [![](https://img.shields.io/badge/Refs-TCLR-yellowgreen)](https://scholar.google.com.hk/scholar?cites=13374282506807262836&as_sdt=2005&sciodt=0,5&hl=zh-CN)
 
-Written using Python, which is suitable for operating systems, e.g., Windows/Linux/MAC OS etc.
+
 
 ## Installing / 安装
     pip install TCLR 
