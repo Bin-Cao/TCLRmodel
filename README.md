@@ -47,6 +47,8 @@ threshold = 0.9
 mininc = 0.01
 split_tol = 0.8
 
+## Contributing / 共建
+Contribution and suggestions are always welcome. In addition, we are also looking for research collaborations. You can submit issues for suggestions, questions, bugs, and feature requests, or submit pull requests to contribute directly. You can also contact the authors for research collaboration.
 model.start(filePath = dataSet, correlation = correlation, minsize = minsize, threshold = threshold,mininc = mininc ,split_tol = split_tol,)
 
 ```
