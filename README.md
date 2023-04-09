@@ -73,10 +73,14 @@ TCLR V1.3 Jun, 2022.
 TCLR V1.4 Jun, 2022.
 + *Integrated symbolic regression algorithm of gplearn package.
 Derive an analytical formula between features and solpes by gplearn*
-+ *add a new parameter of tolerance_list, see document*
++ *add a new parameter of tolerance_list*
 
 TCLR V1.5 Aug, 2022.
-+ *add a new parameter of gpl_dummyfea, see document*
++ *add a new parameter of gpl_dummyfea*
+
+TCLR Apr, 2023.
++ *public user documentationt*
++ *add web interfacet*
 
 ## About / 更多
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
