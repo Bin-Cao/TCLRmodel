@@ -6,6 +6,8 @@ import time
 import copy
 import os
 import warnings
+import random
+from typing import List
 import numpy as np
 import pandas as pd
 from graphviz import Digraph
@@ -29,7 +31,7 @@ class Node:
         self.leaf_no = -1
 
 
-def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc=0.01, split_tol = 0.8,tolerance_list = None , weight=True,
+def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc=0.01, split_tol = 0.8, epochs = 5,random_seed=42, Generate_Features = True, tolerance_list = None , weight=True,
          gplearn = False, gpl_dummyfea = None, population_size = 500, generations = 100, verbose = 1, 
          metric = 'mean absolute error',
          function_set = ['add', 'sub', 'mul', 'div', 'log', 'sqrt', 'abs', 'neg','inv','sin','cos','tan',]):
@@ -76,7 +78,7 @@ def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc
             t is a statistic used in the context of statistical models whose main purpose is either the prediction of future 
             outcomes or the testing of hypotheses, on the basis of other related information. It provides a measure of how well
             observed outcomes are replicated by the model, based on the proportion of total variation of outcomes explained by the model.
-            Definition from Wikipedia ：https://en.wikipedia.org/wiki/Coefficient_of_determination
+            Definition from Wikipedia : https://en.wikipedia.org/wiki/Coefficient_of_determination
             R2 = 1 - SSres / SStot. Its value may be a negative one for poor correlation.
  
   
@@ -91,6 +93,15 @@ def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc
     :param mininc : Minimum expected gain of objective function (default=0.01)
 
     :param split_tol : a float (default=0.8), constrained features value shound be narrowed in a minmimu ratio of split_tol on split path
+
+    :param epochs : an integer (default=5), see parameter Generate_Features (below)
+
+    :param random_seed :  an integer (default=42), see parameter Generate_Features (below)
+
+    :param Generate_Features : boole (default=True). When Generate_Features = True, TCLR will generate new features by operating  
+        the ['+','-','*'] on original features. Iterating [param : epoachs] times, and each time generating 3 new features.  [param : random_seed]
+        is used to control the randomness.
+        When Generate_Features = False, TCLR will apply the original features
 
     :param tolerance_list: 
             constraints imposed on features, default is null
@@ -108,8 +119,6 @@ def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc
             Where W_l is the ratio of the number of samples in the left child node to the total number of samples ;
                   W_r is the ratio of the number of samples in the right child node to the total number of samples.
             When weight is False: linear_gain = R(father node) - ( R(left child node) + R(right child node)) / 2
-
-
 
     :param gplearn : Whether to call the embedded gplearn package of TCLR to regress formula (default=False).
     
@@ -180,7 +189,28 @@ def start(filePath, correlation='PearsonR(+)', minsize=3, threshold=0.95, mininc
     timename = time.localtime(time.time())
     namey, nameM, named, nameh, namem = timename.tm_year, timename.tm_mon, timename.tm_mday, timename.tm_hour, timename.tm_min
 
-    csvData = pd.read_csv(filePath)
+    read_csvData = pd.read_csv(filePath)
+
+    input_csvData = read_csvData.iloc[:,:-2]
+    if Generate_Features == True:
+        # cal an appropriate value of batch
+        if len(input_csvData) - 1 <= 3:
+            batch = 1
+        else:
+            batch = 3
+        # generate new dataset
+        for epoch in range(epochs):
+            # for increasing the randomness
+            random_seed += 1
+            input_csvData = generate_random_features(input_csvData,[column for column in input_csvData],batch,random_seed)
+           
+        input_csvData = input_csvData.assign(linear_X=read_csvData.iloc[:,-2])
+        csvData = input_csvData.assign(linear_Y=read_csvData.iloc[:,-1])
+
+    else:
+        csvData = read_csvData
+    
+    
     copy_csvData = copy.deepcopy(csvData)
     copy_csvData['slope'] = None
     copy_csvData['intercept'] = None
@@ -772,3 +802,39 @@ def weight_gain(subDataSetA,subDataSetB,weight,matrix):
         return R
     else:
         print('Parameter error | weight')
+
+
+# code on 22023 May 9, Bin Cao
+def generate_random_features(df: pd.DataFrame, 
+                            feature_list: List[str],
+                            num_combinations: int,
+                             random_seed:int) -> pd.DataFrame:
+    """
+    randomly generates new feature combinations.
+
+    :param df: DataFrame containing the original features.
+    :param feature_list: List of original features.
+    :param num_combinations: Number of combination features to generate.
+    :return: DataFrame containing the new features.
+    """
+    new_features = []
+    random.seed(random_seed)
+    # randomly generates combination features
+    for i in range(num_combinations):
+        # randomly chooses two features
+        f1 = random.choice(feature_list)
+        f2 = random.choice(feature_list)
+        
+        # choose a operator
+        op = random.choice(['+', '-', '*'])
+        
+        # new feature name
+        new_feature = f'({f1} {op} {f2})'
+        
+        new_features.append(new_feature)
+        
+        # cal new features
+        df[new_feature] = eval(f'df["{f1}"] {op} df["{f2}"]')
+    
+    # reture DataFrame 
+    return df
