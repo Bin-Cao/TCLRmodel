@@ -79,8 +79,8 @@ TCLR V1.5 Aug, 2022.
 + *add a new parameter of gpl_dummyfea*
 
 TCLR Apr, 2023.
-+ *public user documentationt*
-+ *add web interfacet*
++ *user documentationt*
++ *web interface*
 
 ## About / 更多
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
