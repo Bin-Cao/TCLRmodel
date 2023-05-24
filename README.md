@@ -79,7 +79,7 @@ TCLR V1.5 Aug, 2022.
 + *add a new parameter of gpl_dummyfea*
 
 TCLR Apr, 2023.
-+ *user documentationt*
++ *user documentation*
 + *web interface*
 
 ## About / 更多
