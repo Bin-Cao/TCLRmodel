@@ -1,3 +1,18 @@
+"""
+    Tree Classifier for Linear Regression (TCLR) 
+    Author : Bin CAO (binjacobcao@gmail.com) 
+
+    TCLR is a new tree model proposed by Professor T-Y Zhang and Mr. Bin Cao et al. for capturing the functional relationships 
+    between features and target variables. The model partitions the feature space into a set of rectangles, with each partition
+    embodying a specific function. This approach is conceptually simple, yet powerful for distinguishing mechanisms. The entire
+    feature space is divided into disjointed unit intervals by hyperplanes parallel to the coordinate axes. Within each partition,
+    the target variable y is modeled as a linear function of a feature xj (j = 1,⋯,m), which is the linear function used in our studied problem.
+    
+    Patent No. : 2021SR1951267, China
+    Reference : Domain knowledge guided interpretive machine learning ——  Formula discovery for the oxidation behavior of Ferritic-Martensitic steels in supercritical water. Bin Cao et al., 2022, JMI, journal paper.
+    DOI : 10.20517/jmi.2022.04
+"""
+
 import math
 import re
 from tabnanny import check
@@ -804,7 +819,7 @@ def weight_gain(subDataSetA,subDataSetB,weight,matrix):
         print('Parameter error | weight')
 
 
-# code on 22023 May 9, Bin Cao
+# code on 2023 May 9, Bin Cao
 def generate_random_features(df: pd.DataFrame, 
                             feature_list: List[str],
                             num_combinations: int,
@@ -826,15 +841,21 @@ def generate_random_features(df: pd.DataFrame,
         f2 = random.choice(feature_list)
         
         # choose a operator
-        op = random.choice(['+', '-', '*'])
+        op = random.choice(['+', '-', '*',])
+
+        self_op1 = random.choice(['*1', '*2', '*3','*4','**2','**3'])
+        self_op2 = random.choice(['*1', '*2', '*3','*4','**2','**3'])
         
+        new_f1 = f'{f1} {self_op1}'
+        new_f2 = f'{f2} {self_op2}'
+
         # new feature name
-        new_feature = f'({f1} {op} {f2})'
+        new_feature = f'({new_f1} {op} {new_f2})'
         
         new_features.append(new_feature)
         
         # cal new features
-        df[new_feature] = eval(f'df["{f1}"] {op} df["{f2}"]')
+        df[new_feature] = eval(f'(df["{f1}"] {self_op1}) {op} (df["{f2}"] {self_op2})')
     
     # reture DataFrame 
     return df
