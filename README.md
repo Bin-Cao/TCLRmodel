@@ -46,7 +46,7 @@ def FMO_formular(Cr, T=673.15, t = 600, DOC = 10):
     
     input:
     Cr : oxidation chromium equivalent concentration (wt.%), 10.38 <= Cr <= 30.319
-    Cr = [Cr] + 40.3[V] + 2.3[Si] + 10.7[Ni] − 1.5[Mn]
+    Cr(wt.%) = [Cr](wt.%) + 40.3[V](wt.%) + 2.3[Si](wt.%) + 10.7[Ni](wt.%) − 1.5[Mn](wt.%)
     T : Absolute temperature (K), 673.15 <= T <= 923.15
     t : Exposure time (h), 30 <= t <= 2000
     DOC : Dissolved oxygen concentration (ppb), 0 <= DOC <= 8000
