@@ -31,7 +31,7 @@ Reference :
 Papers related : [![](https://img.shields.io/badge/Refs-TCLR-yellowgreen)](https://scholar.google.com.hk/scholar?cites=13374282506807262836&as_sdt=2005&sciodt=0,5&hl=zh-CN)
 
 
-### The formular we proposed in the paper
+### The explicit formula we proposed in the paper
 ``` javascript
 import numpy as np
 
