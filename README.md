@@ -31,6 +31,40 @@ Reference :
 Papers related : [![](https://img.shields.io/badge/Refs-TCLR-yellowgreen)](https://scholar.google.com.hk/scholar?cites=13374282506807262836&as_sdt=2005&sciodt=0,5&hl=zh-CN)
 
 
+### The formular we proposed in the paper
+``` javascript
+import numpy as np
+
+def FMO_formular(Cr, T=673.15, t = 600, DOC = 10):
+    """
+    Cao B, Yang S, Sun A, Dong Z, Zhang TY. 
+    Domain knowledge-guided interpretive machine learning: 
+    formula discovery for the oxidation behavior of ferritic-martensitic 
+    steels in supercritical water. J Mater Inf 2022;2:4. 
+    http://dx.doi.org/10.20517/jmi.2022.04
+    
+    input:
+    10.38 <= Cr <= 30.319
+    673.15 <= T <= 923.15
+    30 <= t <= 2000
+    0 <= DOC <= 8000
+    
+    output:
+    the logarithm of weight gain (mg / dm2)
+    """
+    # Eq.(6c) in paper
+    pre_factor = 0.084*(Cr**3/(T-DOC) - np.sqrt(T+DOC)) + 0.98*(Cr-DOC/T) / np.log(Cr+DOC)+8.543
+    
+    # Eq.(5a) in paper
+    Q = 0.084*(Cr**2-Cr+DOC) / np.exp(DOC/T) + 45.09
+    
+    # Eq.(5b) in paper
+    m = 0.323 - 0.061 * np.exp(DOC/T) / (Cr - np.sqrt(Cr) - DOC)
+    
+    ln_wg = pre_factor + np.log(DOC+2.17) -  Q * 1000 / 8.314 / T + m*np.log(t)
+    
+    return ln_wg
+```    
 
 ## Installing / 安装
     pip install TCLR 
