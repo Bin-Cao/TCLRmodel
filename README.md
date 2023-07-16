@@ -36,6 +36,7 @@ Papers related : [![](https://img.shields.io/badge/Refs-TCLR-yellowgreen)](https
 import numpy as np
 
 def FMO_formular(Cr, T=673.15, t = 600, DOC = 10):
+
     """
     Cao B, Yang S, Sun A, Dong Z, Zhang TY. 
     Domain knowledge-guided interpretive machine learning: 
@@ -53,6 +54,7 @@ def FMO_formular(Cr, T=673.15, t = 600, DOC = 10):
     output:
     the logarithm of weight gain (mg / dm2)
     """
+
     # Eq.(6c) in paper
     pre_factor = 0.084*(Cr**3/(T-DOC) - np.sqrt(T+DOC)) + 0.98*(Cr-DOC/T) / np.log(Cr+DOC)+8.543
     
