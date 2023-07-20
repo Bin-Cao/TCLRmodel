@@ -10,6 +10,7 @@ Source code : [![](https://img.shields.io/badge/PyPI-caobin-blue)](https://pypi.
 ## Package Document / 手册
 see 📒 [TCLR](https://tclr.netlify.app) (Click to view）
 
+see 📝 [微信推文](https://mp.weixin.qq.com/s/6ipwn3o6swcrC_PzSMVoAw) (Click to view）
 
 By incorporating the TCLR into a thermodynamic kinetic framework, it becomes possible to accurately predict the rates of chemical reactions as a function of temperature, pressure, and other system variables. This can be useful in a variety of fields, including materials science, chemical engineering, and biochemistry, where accurate modeling of reaction rates is essential for the design and optimization of chemical processes.
 
