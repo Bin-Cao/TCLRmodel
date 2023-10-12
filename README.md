@@ -3,6 +3,11 @@
 if you have any questions or need help, you are welcome to contact me
 
 Source code : [![](https://img.shields.io/badge/PyPI-caobin-blue)](https://pypi.org/project/TCLR/)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Bin-Cao/TCLRmodel&type=Date)](https://star-history.com/#Bin-Cao/TCLRmodel&Date)
+
 # TCLR 
 
 <img width="214" alt="Screen Shot 2022-07-30 at 22 31 40" src="https://user-images.githubusercontent.com/86995074/230752321-e6a1706d-c024-4ae4-8592-02e04516bdf5.png">
