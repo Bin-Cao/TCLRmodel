@@ -5,6 +5,12 @@ if you have any questions or need help, you are welcome to contact me
 Source code : [![](https://img.shields.io/badge/PyPI-caobin-blue)](https://pypi.org/project/TCLR/)
 [user count](https://pypistats.org/packages/tclr)
 
+
+If you are using this code, please cite:
+
+    Cao B, Yang S, Sun A, Dong Z, Zhang TY. Domain knowledge-guided interpretive machine learning: formula discovery for the oxidation behavior of ferritic-martensitic steels in supercritical water. J Mater Inf 2022;2:4. http://dx.doi.org/10.20517/jmi.2022.04
+
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Bin-Cao/TCLRmodel&type=Date)](https://star-history.com/#Bin-Cao/TCLRmodel&Date)
@@ -26,10 +32,6 @@ TCLR算法通过提供的数据集得到研究变量和时间指数等物理变�
 
 <img width="1044" alt="Screenshot 2023-04-09 at 11 34 48" src="https://user-images.githubusercontent.com/86995074/230752794-54903df8-030b-4630-a1aa-5b67a135c0e5.png">
 
-
-If you are using this code, please cite:
-
-    Cao B, Yang S, Sun A, Dong Z, Zhang TY. Domain knowledge-guided interpretive machine learning: formula discovery for the oxidation behavior of ferritic-martensitic steels in supercritical water. J Mater Inf 2022;2:4. http://dx.doi.org/10.20517/jmi.2022.04
 
 Reference :  
 + (JMI) Cao et al., Doi : http://dx.doi.org/10.20517/jmi.2022.04 
