@@ -11,9 +11,6 @@ If you are using this code, please cite:
     Cao B, Yang S, Sun A, Dong Z, Zhang TY. Domain knowledge-guided interpretive machine learning: formula discovery for the oxidation behavior of ferritic-martensitic steels in supercritical water. J Mater Inf 2022;2:4. http://dx.doi.org/10.20517/jmi.2022.04
 
 
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Bin-Cao/TCLRmodel&type=Date)](https://star-history.com/#Bin-Cao/TCLRmodel&Date)
 
 # TCLR 
 
