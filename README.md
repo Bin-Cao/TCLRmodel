@@ -1,10 +1,23 @@
-🤝🤝🤝 Please star ⭐️ it for promoting open source projects 🌍 ! Thanks !
 
-if you have any questions or need help, you are welcome to contact me
 
-Source code : [![](https://img.shields.io/badge/PyPI-caobin-blue)](https://pypi.org/project/TCLR/)
-[user count](https://pypistats.org/packages/tclr)
+<table>
+  <tr>
+    <td width="160" align="center" valign="top">
+      <img src="https://github.com/user-attachments/assets/7e77bd5a-42d6-45db-b8e6-2c82cac81b9d" width="140" style="border-radius: 50%;"/>
+    </td>
+    <td valign="top">
+      <b>For any inquiries or assistance, feel free to contact Mr. CAO Bin at:</b><br>
+      📧 Email: <a href="mailto:bcao686@connect.hkust-gz.edu.cn">bcao686@connect.hkust-gz.edu.cn</a><br><br>
+      Cao Bin is a PhD candidate at the <b>Hong Kong University of Science and Technology (Guangzhou)</b>, 
+      under the supervision of Professor <a href="https://gbaaa.org.hk/en-us/article/67">Zhang Tong-Yi</a>. His research focuses on 
+      <b>AI for science</b>, especially intelligent crystal-structure analysis and discovery. 
+      Learn more about his work on his 
+      <a href="https://www.caobin.asia/">homepage</a>.
+    </td>
+  </tr>
+</table>
 
+---
 
 If you are using this code, please cite:
 
@@ -132,6 +145,4 @@ TCLR Apr, 2023.
 Maintained by Bin Cao. Please feel free to open issues in the Github or contact Bin Cao
 (bcao686@connect.hkust-gz.edu.cn) in case of any problems/comments/suggestions in using the code. 
 
-## Contributing / 共建
-Contribution and suggestions are always welcome. In addition, we are also looking for research collaborations. You can submit issues for suggestions, questions, bugs, and feature requests, or submit pull requests to contribute directly. You can also contact the authors for research collaboration.
 
